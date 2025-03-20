@@ -11,10 +11,7 @@ static void insert(int a[], unsigned int i, unsigned int length) {
    unsigned int j;
    j = i;
    while(j>0 && goes_before(a[j], a[j-1])){
-    for (int c = 0; i < length; i++)
-    {
-        printf("%d", a[c]);
-    }
+    array_dump(a, length);
     swap(a, j-1, j);
     j = j-1;
    }
@@ -22,6 +19,8 @@ static void insert(int a[], unsigned int i, unsigned int length) {
 
 void insertion_sort(int a[], unsigned int length) {
     for (unsigned int i = 1; i < length; ++i) {
+        assert(array_is_sorted(a, i));
         insert(a, i, length);
     }
+    assert(array_is_sorted(a, length));
 }
