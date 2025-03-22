@@ -70,23 +70,36 @@ int main(int argc, char *argv[]) {
     printf("statistics for selection_sort\n");
     printf("time elapsed=%g,    comparisons: %10u,    swaps: %10u\n", calculate_elapsed_time(), comparisons_number(), swaps_number());
 
-    /* all the same for insertion_sort */
-    /* Usando la idea de las líneas de códigos anteriores
-       muestre las estadísticas (tiempo de ejecución, número de comparaciones e
-       intercambios realizados) para insertion_sort. No te olvides que antes debes
-       copiar el arreglo original, resetear los contadores y setear el tiempo.
-    */
-    /* needs implementation */
+
+    int copy2[MAX_SIZE];
+    array_copy(copy2, array, length);
 
 
-    /* all the same for quick_sort */
-    /* Usando la idea de las líneas de códigos anteriores
-       muestre las estadísticas (tiempo de ejecución, número de comparaciones e
-       intercambios realizados) para quick_sort. No te olvides que antes debes
-       copiar el arreglo original, resetear los contadores y setear el tiempo.
-    */
-    /* needs implementation */
+    /* reset counters and set time */
+    reset_comparisons_counter();
+    reset_swaps_counter();
+    set_current_time();
 
+    insertion_sort(copy2, length);
+    /* show statistics for insertion sort */
+    printf("statistics for insertion sort \n");
+    printf("time elapsed=%g,    comparisons: %10u,    swaps: %10u\n", calculate_elapsed_time(), comparisons_number(), swaps_number());
+
+
+
+    int copy3[MAX_SIZE];
+    array_copy(copy3, array, length);
+
+
+    /* reset counters and set time */
+    reset_comparisons_counter();
+    reset_swaps_counter();
+    set_current_time();
+
+    quick_sort(copy3, length);
+    /* show statistics for quick sort */
+    printf("statistics for quick sort \n");
+    printf("time elapsed=%g,    comparisons: %10u,    swaps: %10u\n", calculate_elapsed_time(), comparisons_number(), swaps_number());
 
 
     return EXIT_SUCCESS;
