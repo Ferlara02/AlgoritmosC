@@ -14,12 +14,12 @@ static unsigned int partition(fixstring a[], unsigned int izq, unsigned int der)
 
     while (i <= j) {
         // Mueve i hacia la derecha mientras a[i] sea menor que el pivote
-        if (i <= der && goes_before(a[i], a[ppiv])) {
+        if (goes_before(a[i], a[ppiv])) {
             i++;
         }
         // Mueve j hacia la izquierda mientras a[j] sea mayor que el pivote
-        else if (j > izq && goes_before(a[ppiv], a[j])) {
-            j--;
+        else if (goes_before(a[ppiv], a[j])) {
+            j = j-1;
         }
         // Si los elementos a[i] y a[j] están fuera de lugar, los intercambiamos
         else {
@@ -29,25 +29,27 @@ static unsigned int partition(fixstring a[], unsigned int izq, unsigned int der)
 
     // Colocamos el pivote en su posición correcta
     swap(a, ppiv, j);
-
-    return j; // Retornamos la posición del pivote
+    ppiv = j;
+    return ppiv; // Retornamos la posición del pivote
 }
     
 
-static void quick_sort_rec(fixstring a[], unsigned int izq, unsigned int der) {
+static void quick_sort_rec(fixstring a[], unsigned int izq, unsigned int der, unsigned int length) {
     unsigned int ppiv;
-    array_dump(a, der+1);
-    if(der > izq) {
-        array_dump(a, der+1);
+    array_dump(a, length);
+    if(der > izq && der < length && izq < length) {
+        array_dump(a, length);
         ppiv = partition(a, izq, der);
-        array_dump(a, der+1);
-        quick_sort_rec(a, izq, ppiv-1);
-        quick_sort_rec(a, ppiv+1, der);
+        array_dump(a, length);
+        if (ppiv > 0) { // Para evitar underflow en unsigned
+            quick_sort_rec(a, izq, ppiv - 1, length);
+        }
+        quick_sort_rec(a, ppiv+1, der, length);
     }
 }
 
 void quick_sort(fixstring a[], unsigned int length) {
-    quick_sort_rec(a, 0, (length == 0) ? 0 : length - 1);
+    quick_sort_rec(a, 0, (length == 0) ? 0 : length - 1, length);
 }
 
 

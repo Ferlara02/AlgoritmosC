@@ -28,7 +28,7 @@ bool fstring_eq(fixstring s1, fixstring s2) {
 bool fstring_less_eq(fixstring s1, fixstring s2) {
     bool res = true;
     int i = 0;
-    while (i<FIXSTRING_MAX && s1[i] == s2[i] && s2[i] != '\0') {
+    while (s1[i] == s2[i] && s2[i] != '\0') {
         i++;
     }
     res = s1[i] <= s2[i];
