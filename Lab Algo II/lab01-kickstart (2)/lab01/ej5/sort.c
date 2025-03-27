@@ -46,9 +46,6 @@ static void quick_sort_rec(fixstring a[], unsigned int izq, unsigned int der, un
     }
 }
 
-void quick_sort(fixstring a[], unsigned int length) {
-    quick_sort_rec(a, 0, (length == 0) ? 0 : length - 1, length);
-}
 
 
 void quick_sort(fixstring a[], unsigned int length) {
