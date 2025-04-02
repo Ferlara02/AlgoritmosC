@@ -39,7 +39,7 @@ static void quick_sort_rec(int a[], unsigned int izq, unsigned int der) {
         array_dump(a, der+1);
         ppiv = partition(a, izq, der);
         array_dump(a, der+1);
-        quick_sort_rec(a, izq, ppiv-1);
+        quick_sort_rec(a, izq, ppiv > 0? ppiv - 1 : 0);
         quick_sort_rec(a, ppiv+1, der);
     }
 }

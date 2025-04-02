@@ -37,16 +37,16 @@ static unsigned int partition(fixstring a[], unsigned int izq, unsigned int der)
 static void quick_sort_rec(fixstring a[], unsigned int izq, unsigned int der, unsigned int length) {
     unsigned int ppiv;
     array_dump(a, length);
-    if(der > izq && der < length && izq < length) {
+    if(der > izq ) {
         array_dump(a, length);
         ppiv = partition(a, izq, der);
         array_dump(a, length);
-        if (ppiv > 0) { // Para evitar underflow en unsigned
-            quick_sort_rec(a, izq, ppiv - 1, length);
-        }
+        quick_sort_rec(a, izq, ppiv > 0? ppiv - 1 : 0, length);
         quick_sort_rec(a, ppiv+1, der, length);
     }
 }
+
+
 
 void quick_sort(fixstring a[], unsigned int length) {
     quick_sort_rec(a, 0, (length == 0) ? 0 : length - 1, length);
