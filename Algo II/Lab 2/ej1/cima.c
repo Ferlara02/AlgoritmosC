@@ -12,11 +12,28 @@
  * @param a Arreglo.
  * @param length Largo del arreglo.
  */
+
+/*bool tiene_cima(int a[], int length) {
+    int i = 0;
+    int j = length -1;
+    bool sort1 = true;
+    bool sort2 = true;
+
+
+    while(sort1 && sort2 && i<=j) {
+        bool sort1 = a[i] < a[i+1];
+        bool sort2 = a[j] > a[j-1];
+        i++;
+        j--;
+    }
+
+    return (sort1 && sort2);
+}*/
 bool tiene_cima(int a[], int length) {
     int i = 0;
     bool res = false;
     while(i<length-2 && !res) {
-        res = res || (a[i] < a[i+1] && a[i+1] > a[i+2]);
+        res = res  (a[i] < a[i+1] && a[i+1] > a[i+2]);
         i++;
     }
 
