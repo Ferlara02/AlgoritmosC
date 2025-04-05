@@ -3,7 +3,7 @@
 #include "cima.h"
 
 int main(void) {
-    int a[] = {-2, 8, 9, 510, 10000, 1};
+    int a[] = {1, 2, 3, 2, 1, 0};
     int length = 6;
     int result;
 

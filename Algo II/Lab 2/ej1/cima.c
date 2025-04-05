@@ -13,32 +13,37 @@
  * @param length Largo del arreglo.
  */
 
-/*bool tiene_cima(int a[], int length) {
+bool tiene_cima(int a[], int length) {
     int i = 0;
     int j = length -1;
     bool sort1 = true;
     bool sort2 = true;
 
-
-    while(sort1 && sort2 && i<=j) {
-        bool sort1 = a[i] < a[i+1];
-        bool sort2 = a[j] > a[j-1];
+    while(sort1 && i<j-1) {
+        sort1 = sort1 && a[i] < a[i+1];
         i++;
+    }
+    while(sort2 && i<j-1) {
+        sort2 = sort2 && a[j] < a[j-1]; 
         j--;
     }
 
-    return (sort1 && sort2);
-}*/
-bool tiene_cima(int a[], int length) {
-    int i = 0;
-    bool res = false;
-    while(i<length-2 && !res) {
-        res = res  (a[i] < a[i+1] && a[i+1] > a[i+2]);
-        i++;
-    }
-
-    return res;
+    return (i==j-1);
 }
+
+
+// bool tiene_cima(int a[], int length) {
+//     int i = 0;
+//     bool res = false;
+//     while(i<length-2 && !res) {
+//         res = res || (a[i] < a[i+1] && a[i+1] > a[i+2]);
+//         i++;
+//     }
+
+//     return res;
+// }
+
+
 
 /**
  * @brief Dado un arreglo que tiene cima, devuelve la posición de la cima.
@@ -53,12 +58,11 @@ bool tiene_cima(int a[], int length) {
  * @param length Largo del arreglo.
  */
 int cima(int a[], int length) {
-    int pos;
-    int i = 1;
+    int pos = 1;
     bool res = false;
-    while(i<length-1 && !res) {
-        res = res || (a[i-1] < a[i] && a[i] > a[i+1]);
-        i++;
+    while(pos < length-1 && !res) {
+        res = res || (a[pos-1] < a[pos] && a[pos] > a[pos+1]);
+        pos++;
     }
 
     return pos;
