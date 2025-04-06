@@ -3,8 +3,8 @@
 #include "cima.h"
 
 int main(void) {
-    int a[] = {1, 2, 3, 2, 1, 0};
-    int length = 6;
+    int a[] = {1, 2, 3, 4, -123};
+    int length = 5;
     int result;
 
     result = tiene_cima(a, length);
