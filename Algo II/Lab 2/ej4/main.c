@@ -52,7 +52,8 @@ double medir_cima(int a[], int length) {
     // llamar a la funcion (ignorar resultado)
     cima(a, length);
 
-    // tomar tiempo al final
+    // tomar tiempo al finalgcc -Wall -Wextra -pedantic -std=c99 -g cima.c cima_log.c main.c -o main
+
     end = clock();
 
     // calcular tiempo en milisegundos
@@ -61,21 +62,20 @@ double medir_cima(int a[], int length) {
     return cpu_time_used;
 }
 
-double medir_cima_log(int a[], int length) {
-    clock_t start, end;
-    double cpu_time_used;
+ double medir_cima_log(int a[], int length) {
+     clock_t start, end;
+     double cpu_time_used;
 
-    // tomar tiempo al inicio
-    start = clock();
+     // tomar tiempo al inicio
+     start = clock();
 
-    // llamar a la funcion (ignorar resultado)
-    cima_log(a, length);
+     // llamar a la funcion (ignorar resultado)
+     cima_log(a, length);
 
-    // tomar tiempo al final
-    end = clock();
+     // tomar tiempo al final
+     end = clock();
 
-    // calcular tiempo en milisegundos
-    cpu_time_used = ((double) (end - start)) / (CLOCKS_PER_SEC / 1000);
-
-    return cpu_time_used;
+     // calcular tiempo en milisegundos
+     cpu_time_used = ((double) (end - start)) / (CLOCKS_PER_SEC / 1000);
+   return cpu_time_used;
 }

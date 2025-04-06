@@ -17,7 +17,6 @@
  */
 
 //cima con busqueda binaria, implementacion recursiva:
-
 int cima_log_rec(int a[], int lft, int rgt) {
     int pos;
     int mid;
@@ -35,4 +34,3 @@ int cima_log(int a[], int length) {
    int pos = cima_log_rec(a, 0, length-1);
    return pos;
 }
-

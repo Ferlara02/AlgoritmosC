@@ -1,6 +1,7 @@
-#include <stdio.h>
+#ifndef _CIMA_H
+#define _CIMA_H
+
 #include <stdbool.h>
-#include "cima.h"
 
 /**
  * @brief Indica si el arreglo tiene cima.
@@ -12,25 +13,7 @@
  * @param a Arreglo.
  * @param length Largo del arreglo.
  */
-
-
-bool tiene_cima(int a[], int length) {
-    int i = 1;
-    
-    while(i<length && a[i-1] < a[i]) { 
-        i++;
-    }
-
-    if(i>=1){
-        while(i<length && a[i-1]>a[i]) {
-            i++;
-        }
-    }
-
-    
-    return i==length;
-}
-
+bool tiene_cima(int a[], int length);
 
 /**
  * @brief Dado un arreglo que tiene cima, devuelve la posición de la cima.
@@ -44,13 +27,6 @@ bool tiene_cima(int a[], int length) {
  * @param a Arreglo.
  * @param length Largo del arreglo.
  */
+int cima(int a[], int length);
 
-
-
-int cima(int a[], int length) {
-    int pos = 0;
-    while(pos < length-1 && a[pos] < a[pos+1]) {
-        pos++;
-    }
-    return pos;
-}
+#endif
