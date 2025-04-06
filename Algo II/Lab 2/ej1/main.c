@@ -1,21 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "cima.h"
+#include "k_esimo.h"
 
 int main(void) {
-    int a[] = {1, 2, 3, 4, -123};
-    int length = 5;
+    int a[] = {8, 0, 9, -2, 13, 6};
+    int length = 6;
+    int k = 4;
     int result;
 
-    result = tiene_cima(a, length);
+    result = k_esimo(a, length, k);
 
-
-    if(result) {
-        printf("Tiene cima?: si");
-    } else {
-        printf("Tiene cima?: no");
-    }   
-
+    printf("Resultado: %i\n", result);
 
     return EXIT_SUCCESS;
 }
