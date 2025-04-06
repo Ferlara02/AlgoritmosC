@@ -16,6 +16,7 @@
  * @param length Largo del arreglo.
  */
 
+//cima con busqueda binaria, implementacion recursiva:
 
 int cima_log_rec(int a[], int lft, int rgt) {
     int pos;
@@ -32,7 +33,6 @@ int cima_log_rec(int a[], int lft, int rgt) {
             pos = cima_log_rec(a, lft, mid-1);
         }
     }
-
     return pos;
 }
 
