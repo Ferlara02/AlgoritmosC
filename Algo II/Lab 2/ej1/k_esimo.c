@@ -1,11 +1,11 @@
 #include <stdbool.h>
 #include "k_esimo.h"
 #include <stdio.h>
+
 // FUNCIONES INTERNAS DEL MÓDULO:
 int partition(int a[], int izq, int der);
 bool goes_before(int x, int y);
 void swap(int a[], int i, int j);
-
 /**
  * @brief K-esimo elemento mas chico del arreglo a.
  *
@@ -44,7 +44,6 @@ int k_esimo(int a[], int length, int k) {
 }
 
 
-
 int partition(int a[], int izq, int der) {
     int i, j, ppiv;
     ppiv = izq;
@@ -59,17 +58,14 @@ int partition(int a[], int izq, int der) {
             swap(a, i, j);
         }
     }
-
     swap(a, ppiv, j);
     ppiv = j;
-
     return ppiv;
 }
 
 bool goes_before(int x, int y) {
     return x <= y;
 }
-
 void swap(int a[], int i, int j) {
     int tmp = a[i];
     a[i] = a[j];

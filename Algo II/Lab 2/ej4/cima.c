@@ -17,11 +17,11 @@
 bool tiene_cima(int a[], int length) {
     int i = 1;
     
-    while(i<length-1 && a[i-1] < a[i]) { 
+    while(i<length && a[i-1] < a[i]) { 
         i++;
     }
 
-    if(i>1){
+    if(i>=1){
         while(i<length && a[i-1]>a[i]) {
             i++;
         }
@@ -44,6 +44,7 @@ bool tiene_cima(int a[], int length) {
  * @param a Arreglo.
  * @param length Largo del arreglo.
  */
+
 
 
 int cima(int a[], int length) {
