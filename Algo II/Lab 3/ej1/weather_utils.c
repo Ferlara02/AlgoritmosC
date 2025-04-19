@@ -57,7 +57,7 @@ void month_max_prec (WeatherTable med, int output[YEARS]) {
                 prec_month = prec_month + med[year][month][day]._rainfall;
             }
             if(prec_month > max_prec) {
-                max_month = month;
+                max_month = month+1;
                 max_prec = prec_month;
             }
         }

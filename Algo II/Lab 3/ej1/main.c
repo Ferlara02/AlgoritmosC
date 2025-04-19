@@ -10,6 +10,8 @@
 
 /* Then, this project's includes, alphabetically ordered */
 #include "weather_table.h"
+#include "weather_utils.h"
+
 
 /**
  * @brief print usage help
@@ -48,7 +50,16 @@ char *parse_filepath(int argc, char *argv[]) {
 
     return (result);
 }
-
+void array_dump(int a[], unsigned int length) {
+    for (unsigned int i = 0u; i < length; ++i) {
+        fprintf(stdout, "%i", a[i]);
+        if (i < length - 1) {
+            fprintf(stdout, " ");
+        } else {
+            fprintf(stdout, "\n");
+        }
+    }
+}
 /**
  * @brief Main program function
  *
@@ -70,7 +81,20 @@ int main(int argc, char *argv[]) {
     table_from_file(table, filepath);
 
     /* show the table in the screen */
-    table_dump(table);
+    //table_dump(table);
+
+    int min = temp_min(table);
+    printf("La temperatura minima historica es: %i\n", min);
+    int output[YEARS];
+
+    temp_max_year(table, output);
+    printf("La temperatura máxima de cada año (en orden) es: \n");
+    array_dump(output, YEARS);
+
+    int output2[YEARS];
+    month_max_prec(table, output2);
+    printf("El mes de cada año con mayor cantidad mensual de precipitaciones: \n");
+    array_dump(output2, YEARS);
 
     return EXIT_SUCCESS;
 }
