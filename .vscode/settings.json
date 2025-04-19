@@ -3,6 +3,7 @@
         "*.embeddedhtml": "html",
         "stdio.h": "c",
         "stdbool.h": "c",
-        "weather_utils.h": "c"
+        "weather_utils.h": "c",
+        "weather_table.h": "c"
     }
 }
