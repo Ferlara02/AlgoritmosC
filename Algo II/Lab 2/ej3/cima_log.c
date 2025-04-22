@@ -31,6 +31,7 @@ int cima_log_rec(int a[], int lft, int rgt) {
     }
     return pos;
 }
+
 int cima_log(int a[], int length) {
    int pos = cima_log_rec(a, 0, length-1);
    return pos;
