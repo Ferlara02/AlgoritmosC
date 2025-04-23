@@ -41,8 +41,14 @@ Ranking ranking_from_file(FILE *file) {
     return ranking;
 }
 
-//float  total_track_points_per_team(RankingTable a, char *team_name) {
-   // float sum = 0;
-    
- //   return sum;
-//} 
+float  total_track_points_per_team(RankingTable a, char *team_name) {
+  float sum = 0;
+  for (int i = 0; i < NO_PLAYERS; i++)
+  {
+    if(strcmp(a[i][1].team, team_name) == 0) {
+      sum += a[i][1].points;
+    }
+  }
+  
+  return sum;
+} 

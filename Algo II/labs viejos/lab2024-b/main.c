@@ -73,10 +73,13 @@ int main(int argc, char *argv[]) {
     /* show the data on the screen */
     array_dump(array);
 
-    //char *team_name = "...";
-    //scanf("Nombre de equipo a buscar: %s", );
+    char *team_name = malloc(50*sizeof(char));
 
-    printf("\nTotal Maximo de /* COMPLETAR */ \n" /* COMPLETAR */ );
+    printf("Nombre de equipo a buscar: ");
+    scanf("%s", team_name);
+    float total = total_track_points_per_team(array, team_name);
+    printf("\nTotal Maximo de  %s\n es: %f\n", team_name, total);
 
+    free(team_name);
     return (EXIT_SUCCESS);
 }
