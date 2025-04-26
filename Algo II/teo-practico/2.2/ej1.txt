@@ -68,6 +68,16 @@ proc addl (in e : T, in/out l : List of T)
     l := p
 end proc
 
+proc destroy (in/out l: List of T)
+    var p: pointer to (Node of T)
+    while (l ≠ null) do
+        p:= l
+        l:= l->next
+        free(p)
+    od
+end proc
+
+
 fun is_empty(l : List of T) ret b : bool
     b:= l = null
 end fun
