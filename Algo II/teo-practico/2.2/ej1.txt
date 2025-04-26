@@ -169,14 +169,30 @@ proc drop(in/out l: List of T, in n: nat)
     var p pointer to (Node of T)
     var i : nat
     i := 0
-    if (not is_empty(l) && n > 0) then
-        while (i < n && not is_empty(l)) do
-            p := l
-            l := l  -> next
-            free(p)
-            i := i++
-        od
-    fi
+    while (i < n && not is_empty(l)) do
+        p := l
+        l := l  -> next
+        free(p)
+        i := i++
+    od
 end proc
 
-fun copy_list(l1 : List of T) ret l2 : List of T
+fun copy_list(l1: List of T) ret l2: List of T
+    var p: pointer to (Node of T)
+    var q: pointer to (Node of T)
+    if (l1 = null) then 
+        l2 := empty_list()
+    else
+        alloc(l2)
+        l2->elem := l1->elem
+        p := l1->next
+        q := l2
+        while (p != null) do
+            alloc(q->next)
+            q := q->next
+            q->elem := p->elem
+            p := p->next
+        od
+        q -> next := null
+    fi
+end fun
