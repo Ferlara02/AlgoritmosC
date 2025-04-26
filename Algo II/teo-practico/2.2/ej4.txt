@@ -3,18 +3,18 @@
 spec Tablero where
 
 constructors
-    fun tanteador_inicial() ret t: Tablero
-    {- inicializa el tablero -}
+    fun tanteador_init() ret t: Tablero
+    {- inicializar el tablero -}
 
     proc sumar_A (in/out t: Tablero)
-    {- incrementa el contador de A -}
+    {- incrementar el contador de A -}
 
     proc sumar_B (in/out t: Tablero)
-    {- incrementa el contador de B -}
+    {- incrementar el contador de B -}
 
 destroy
-    proc destroy (in/out t: Tablero)
-    {- libera memoria -}
+    proc destroy_t (in/out t: Tablero)
+    {- liberar memoria -}
 
 operations
     fun tanteador_es_0 (t: Tablero) ret res b: bool
@@ -39,3 +39,115 @@ operations
 
     proc restar_n_tantos (in/out t: Tablero, e: char, in n: nat)
     {- restarle n tantos al equipo e -}
+-------------------------------------------------------
+
+2) b) 
+
+/* Usaremos el TAD Contador: */
+spec Counter where
+
+constructors
+    fun init() ret c : Counter
+    {- crea un contador inicial. -}
+
+    proc incr (in/out c : Counter)
+    {- incrementa el contador c. -}
+
+destroy
+    proc destroy (in/out c : Counter)
+    {- Libera memoria en caso que sea necesario. -}
+
+operations
+    fun is_init(c : Counter) ret b : Bool
+    {- Devuelve True si el contador es inicial -}
+
+    proc decr (in/out c : Counter)
+    {- Decrementa el contador c. -}
+    {- PRE: not is_init(c) -}
+
+/* -------------------------------------------- */
+
+implement Tablero where
+
+type tanteador = Tuple
+                    tantosA := Counter
+                    tantosB := Counter
+                end tuple
+
+type Tablero = tanteador
+
+fun tanteador_init() ret t : Tablero
+    t.tantosA := init()
+    t.tantosB := init()
+end fun
+
+proc sumar_A (in/out t: Tablero)
+    incr(t.tantosA) 
+end proc
+
+proc sumar_B (in/out t: Tablero)
+    incr(t.tantosB) 
+end proc
+
+proc destroy_t (in/out t: Tablero)
+    destroy(t.tantosA)
+    destroy(t.tantosB)
+end proc
+
+fun tanteador_es_0 (t: Tablero) ret res : bool
+    res := t.tantosA = 0 ^ t.tantosB = 0 --> Esto sería romper la abstracción. Debo usar las operaciones definidas del TAD counter!!!:
+
+    res := is_init(t.tantosA) ^ is_init(t.tantosB)
+end fun
+
+fun tanteador_A (t: Tablero) ret res : bool
+    res := ¬(is_init(t.tantosA))
+end fun
+
+fun tanteador_B (t: Tablero) ret res : bool
+    res := ¬(is_init(t.tantosB))
+end fun
+
+fun gana_A (t: Tablero) ret res: bool
+    res := (t.tantos_B < t.tantos_A)
+end fun
+
+fun gana_B (t: Tablero) ret res: bool
+    res := (t.tantos_A < t.tantos_B)
+end fun
+
+fun empate (t: Tablero) ret res : bool
+    res := (t.tantos_A = t.tantos_B)
+end fun
+
+proc sumar_ (in/out t: Tablero, e: char, in n: nat)
+    if(e = 'A') then
+        for i := 1 to n do
+            incr(t.tantosA)
+        od
+    else if ('B') then
+        for i := 1 to n do
+            incr(t.tantosB)
+        od
+    fi
+end proc 
+
+proc castigo_n (in/out t: Tablero, e: char, in n: nat)
+    if(e = 'A') then
+        if(n > t.tantosA) then
+            t.tantosA := init()
+        else
+            for i := 1 to n do
+                decr(t.tantosA)
+            od
+        fi
+    else if ('B') then
+        if(n > t.tantosB) then
+            t.tantosB := init()
+        else
+            for i := 1 to n do
+                decr(t.tantosB)
+            od
+        fi
+    fi
+end proc
