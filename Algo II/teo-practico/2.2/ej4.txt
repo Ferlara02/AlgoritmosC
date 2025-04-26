@@ -1,0 +1,41 @@
+4)a)
+
+spec Tablero where
+
+constructors
+    fun tanteador_inicial() ret t: Tablero
+    {- inicializa el tablero -}
+
+    proc sumar_A (in/out t: Tablero)
+    {- incrementa el contador de A -}
+
+    proc sumar_B (in/out t: Tablero)
+    {- incrementa el contador de B -}
+
+destroy
+    proc destroy (in/out t: Tablero)
+    {- libera memoria -}
+
+operations
+    fun tanteador_es_0 (t: Tablero) ret res b: bool
+    {- el tanteador está en 0 ?-}
+
+    fun tanteador_A (t: Tablero) ret res b: bool
+    {- anotó A? -}
+
+    fun tanteador_B (t: Tablero) ret res b: bool
+    {- anotó B? -}
+
+    fun gana_A (t: Tablero) ret res b: bool
+    {- A va ganando? -}
+
+    fun gana_B (t: Tablero) ret res b: bool
+    {- B va ganando? -}
+
+    fun empate (t: Tablero) ret res b: bool
+
+    proc sumar_n_tantos (in/out t: Tablero, e: char, in n: nat)
+    {- sumar n tantos al equipo e -}
+
+    proc restar_n_tantos (in/out t: Tablero, e: char, in n: nat)
+    {- restarle n tantos al equipo e -}
