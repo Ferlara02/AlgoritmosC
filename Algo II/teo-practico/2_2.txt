@@ -1,0 +1,120 @@
+spec List of T where
+
+constructors
+    fun empty() ret l: List of T
+    //crea una lista vacía
+
+    proc addl(in e : T, in/out l : List of T)
+
+destroy
+    proc destroy (in/out l : List of T)
+
+operations
+    fun is_empty(l : List of T) ret b : bool
+    {- Devuelve True si l es vacía. -}
+
+    fun head(l : List of T) ret e : T
+    {- Devuelve el primer elemento de la lista l -}
+
+    proc tail(in/out l : List of T)
+    {- Elimina el primer elemento de la lista l -}
+
+    proc addr (in/out l : List of T,in e : T)
+    {- agrega el elemento e al final de la lista l. -}
+
+    fun length(l : List of T) ret n : nat
+    {- Devuelve la cantidad de elementos de la lista l -}
+
+    proc concat(in/out l : List of T,in l0 : List of T)
+    {- Agrega al final de l todos los elementos de l0
+    en el mismo orden.-}
+
+    fun index(l : List of T,n : nat) ret e : T
+    {- Devuelve el n-ésimo elemento de la lista l -}
+    {- PRE: length(l) > n -}
+
+    proc take(in/out l : List of T,in n : nat)
+    {- Deja en l sólo los primeros n
+    elementos, eliminando el resto -}
+
+    proc drop(in/out l : List of T,in n : nat)
+    {- Elimina los primeros n elementos de l -}
+
+    fun copy_list(l1 : List of T) ret l2 : List of T
+    {- Copia todos los elementos de l1 en la nueva lista l2 -}
+
+/------------------------------------------------/
+
+1)
+
+implement List of T where
+
+type Node of T = Tuple
+                    elem : T
+                    next : pointer to (Node of T)
+                 end Tuple
+
+type List of T = pointer to (Node of T)
+
+fun empty() ret l : List of T
+    l := null
+end fun
+
+proc addl (in e : T, in/out l : List of T)
+    var p : pointer to (Node of T)
+    alloc(p)
+    p->elem := e //esto es equiv. a hacer: *p.name := e 
+    p->next := l
+    l := p
+end proc
+
+fun is_empty(l : List of T) ret b : bool
+    b:= l = null
+end fun
+
+
+{- PRE: not is_empty(l) -}
+fun head (l : List of T) ret e : T
+    e := l -> elem // = *l.elem
+end fun
+
+
+{- PRE: not is_empty(l) -}
+proc tail(in/out l : List of T)
+    var p : pointer to (Node of T)
+    p := l //guardas el nodo actual (para luego poder liberarlo y que no haya memory leak)
+    l := l-> next //avanzas la lista al siguiente nodo
+    free(p) //liberas el nodo que ya no necesitas
+end proc 
+
+proc addr (in/out l : List of T, in e : T)
+    var p, q : pointer to (Node of T)
+    alloc(q)
+    q -> elem := e
+    q -> next := null
+    if(not is_empty(l)) then
+        p := l
+        do (p -> next != null)
+            p := p -> next
+        od 
+        p -> next := q
+    else l := q
+    fi 
+end proc
+
+fun length (l : List of T) ret n : nat
+    var p : pointer to (Node of T)
+    n := 0
+    p := l
+    do (p != null)
+        n := n+1
+        p := p->next
+    od
+end fun
+
+--> completar: 
+- concat
+- index
+- take
+- drop
+- copy_list
