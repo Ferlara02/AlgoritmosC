@@ -112,9 +112,71 @@ fun length (l : List of T) ret n : nat
     od
 end fun
 
---> completar: 
-- concat
-- index
-- take
-- drop
-- copy_list
+
+proc concat(in/out l : List of T,in l0 : List of T)
+    var p : pointer to (Node of T)
+    if(not is_empty(l)) then
+        p := l
+        do (p -> next != null)
+            p := p -> next
+        od 
+        p -> next := l0
+    else l := l0
+    fi 
+end proc
+
+
+{- PRE: length(l) > n -}
+fun index(l : List of T, n : nat) ret e : T
+    var p : pointer to (Node of T)
+    p := l
+    if(n>1) then
+        for i=1 to n-1 do
+            p := p -> next
+        od
+    fi
+    e := p->elem
+    free(p) ??? preguntar
+end fun
+
+proc take(in/out l : List of T, in n : nat)
+    var p, q : pointer to (Node of T)
+    var i : nat
+    i := 0
+    if (not is_empty(l)) then
+        if (n = 0) then
+            while (not is_empty(l)) do
+                p := l
+                l := -> next
+                free(p)
+            od
+        else if (n > 0) then
+            p := l
+            while (not is_empty(l) && i < n) do
+                p := p->next
+                i := i+1
+            od
+            while (not is_empty(p)) do
+                q := p
+                p := p-> next
+                free(q) //voy liberando los nodos despues de n.
+            od
+        fi
+    fi
+end proc
+
+proc drop(in/out l: List of T, in n: nat)
+    var p pointer to (Node of T)
+    var i : nat
+    i := 0
+    if (not is_empty(l) && n > 0) then
+        while (i < n && not is_empty(l)) do
+            p := l
+            l := l  -> next
+            free(p)
+            i := i++
+        od
+    fi
+end proc
+
+fun copy_list(l1 : List of T) ret l2 : List of T
