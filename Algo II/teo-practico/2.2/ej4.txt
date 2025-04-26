@@ -41,7 +41,7 @@ operations
     {- restarle n tantos al equipo e -}
 -------------------------------------------------------
 
-2) b) 
+4) b) 
 
 /* Usaremos el TAD Contador: */
 spec Counter where
@@ -151,3 +151,7 @@ proc castigo_n (in/out t: Tablero, e: char, in n: nat)
         fi
     fi
 end proc
+
+
+
+4)c)
