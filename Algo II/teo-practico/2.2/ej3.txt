@@ -1,0 +1,14 @@
+3)
+
+{- PRE: n < length(l) -}
+proc add_t (in/out l : List of T, in n : nat, in e : T)
+    var q : List of T
+    q := copy_list(l)
+    drop(q, n-1)
+    take(l, n-1)
+    addr(l, e)
+    concat(l, q)
+    destroy(q)
+end proc
+
+
