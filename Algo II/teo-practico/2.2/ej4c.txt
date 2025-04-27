@@ -1,0 +1,123 @@
+spec Tablero where
+
+constructors
+    fun tanteador_init() ret t: Tablero
+    {- inicializar el tablero -}
+
+    proc sumar_A (in/out t: Tablero)
+    {- incrementar el contador de A -}
+
+    proc sumar_B (in/out t: Tablero)
+    {- incrementar el contador de B -}
+
+destroy
+    proc destroy_t (in/out t: Tablero)
+    {- liberar memoria -}
+
+operations
+    fun tanteador_es_0 (t: Tablero) ret res b: bool
+    {- el tanteador está en 0 ?-}
+
+    fun tanteador_A (t: Tablero) ret res b: bool
+    {- anotó A? -}
+
+    fun tanteador_B (t: Tablero) ret res b: bool
+    {- anotó B? -}
+
+    fun gana_A (t: Tablero) ret res b: bool
+    {- A va ganando? -}
+
+    fun gana_B (t: Tablero) ret res b: bool
+    {- B va ganando? -}
+
+    fun empate (t: Tablero) ret res b: bool
+
+    proc sumar_n (in/out t: Tablero, e: char, in n: nat)
+    {- sumar n tantos al equipo e -}
+
+    proc castigar_n (in/out t: Tablero, e: char, in n: nat)
+    {- restarle n tantos al equipo e -}
+-------------------------------------------------------
+
+
+4)c) "¿Hay alguna diferencia con la implementacion
+del inciso anterior? ¿Alguna operacion puede resolverse mas eficientemente?"
+
+-> Si, hay diferencia. Las operaciones que involucran aumentar o decrementar el contador n veces, con la tupla de naturales, son de orden O(1). Mientras que con la tupla de dos contadores son de orden O(n) {lineal} ya que involucran ciclos. 
+
+Implementacion: 
+
+----
+implement Tablero where
+
+type tanteador = tuple
+                    tantosA : nat
+                    tantosB : nat
+                end tuple
+
+type Tablero = tanteador
+
+fun tanteador_init() ret t: Tablero
+    t.tantosA := 0
+    t.tantosB := 0
+end fun
+
+proc sumar_A (in/out t: Tablero)
+    t.tantosA := t.tantosA + 1 
+end proc
+
+proc sumar_B (in/out t: Tablero)
+    t.tantosB := t.tantosB + 1 
+end proc
+
+proc destroy_t (in/out t: Tablero)
+    skip
+end proc
+
+fun tanteador_es_0 (t: Tablero) ret res : bool
+    res := (t.tantosA = 0 ^ t.tantosB = 0)
+end fun
+
+fun tanteador_A (t: Tablero) ret res : bool
+    res := t.tantosA > 0 
+end fun
+
+fun tanteador_B (t: Tablero) ret res : bool
+    res := t.tantosB > 0 
+end fun
+
+fun gana_A (t: Tablero) ret res : bool
+    res := t.tantosA > t.tantosB
+end fun
+
+fun gana_B (t: Tablero) ret res : bool
+    res := t.tantosA < t.tantosB
+end fun
+
+fun empate (t: Tablero) ret res : bool
+    res := t.tantosA = t.tantosB
+end fun
+
+proc sumar_n (in/out t: Tablero, e: char, in n: nat)
+    if (e = 'A') then
+        t.tantosA := t.tantosA + n
+    else if (e = 'b') then
+        t.tantosB := t.tantosB +n
+    fi  
+end proc
+
+proc castigar_n (in/out t: Tablero, e: char, in n: nat)
+    if (e = 'A') then
+        if(n > t.tantosA) then
+            t.tantosA := 0
+        else
+            t.tantosA := t.tantosA - n
+        fi
+    else if (e = 'b') then
+        if (n > t.tantosB ) then
+            t.tantosB := 0
+        else    
+            t.tantosB := t.tantosB - n
+        fi
+    fi  
+end proc   

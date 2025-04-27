@@ -152,6 +152,3 @@ proc castigo_n (in/out t: Tablero, e: char, in n: nat)
     fi
 end proc
 
-
-
-4)c)
