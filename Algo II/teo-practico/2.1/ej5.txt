@@ -1,0 +1,46 @@
+5) a) algoritmo lex_less que recibe ambos arreglos y determina si a es lexicograficamente menor que b
+
+fun lex_less (a, b : array[1..n] of nat) ret res : bool
+    var i : nat
+    i := 1
+    res := false
+    while (i < n ^ a[i] = b[i]) do
+        i++
+    od
+    res := a[i] < b[i]
+end fun
+
+5) b) algoritmo lex_less_or_equal que recibe ambos arreglos y determina si a es lexicograficamente menor o igual a b
+
+fun lex_less_or_equal (a, b : array[1..n] of nat) ret res : bool
+    var i : nat
+    i := 1
+    res := false
+    while (i < n ^ a[i] = b[i]) do
+        i++
+    od
+    res := (a[i] < b[i]) v i = n 
+end fun 
+
+
+5) c)
+
+type ord = enumerate
+                igual
+                menor
+                mayor
+           end enumerate
+
+fun lex_compare (a, b : array[1..n]) ret res ord
+    var i : nat
+    i := 1
+    while(i < n ^ a[i] = b[i]) do
+        i := i + 1
+    od
+    if (a[i] < b[i]) then res := menor
+    else if (a[i] = b[i]) then res := igual
+    else res := mayor
+    fi
+end fun
+
+/* El interés de escribir este algoritmo es su legibilidad y claridad semántica tanto en su uso como en su revisión. Un programador no interiorizado en el programa va a entender más el qué hace dicho algoritmo si lo que devuelve es un tipo abstracto adaptado a la especificidad de lo que hace el mismo, que si lo que devuelve es simplemente un bool. */
