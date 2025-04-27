@@ -1,0 +1,63 @@
+5)
+
+spec Conjunto of T where
+
+constructors  
+    fun vacío() ret c : Conjunto of T
+
+    proc add_elem(in/out c : Conjunto of T, out e : T)
+
+destroy
+    proc destroy_c(in/out c : Conjunto of T)
+
+operations 
+    fun pert (c : Conjunto of T, e : T) ret res : bool
+
+    fun es_vacio (c : Conjunto of T) ret res : bool 
+
+    proc union (in/out c : Conjunto of T, in s : Conjunto of T)
+
+    proc intersec (in/out c : Conjunto of T, in s : Conjunto of T)
+
+    proc dif (in/out c : Conjunto of T, in s : Conjunto of T)
+
+6) a)
+
+implement Conjunto of T where
+
+type Conjunto of T = List of T
+
+fun vacio() ret c : Conjunto of T
+    c := empty()
+end fun
+
+{- PRE: ¬pert(c, e) -}
+proc add_elem(in/out c : Conjunto of T, out e : T)
+    addl(e, c)
+end proc
+
+proc destroy_c(in/out c : Conjunto of T)
+    destroy(c)
+end proc
+
+fun pert (c : Conjunto of T, e : T) ret res : bool
+    var p : Conjunto of T 
+    p := copy_list(c)
+    while(e != head(p)) do
+        tail(p)
+    od
+    res := ¬(is_empty(p))
+end fun
+
+fun es_vacio (c : Conjunto of T) ret res : bool 
+    res := is_empty(c)
+end fun
+
+{En la union, los elementos compartidos no se repiten.}
+proc union (in/out c : Conjunto of T, in s : Conjunto of T)
+    
+end proc
+
+proc intersec (in/out c : Conjunto of T, in s : Conjunto of T)
+
+proc dif (in/out c : Conjunto of T, in s : Conjunto of T)
