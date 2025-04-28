@@ -55,7 +55,10 @@ end fun
 
 {En la union, los elementos compartidos no se repiten.}
 proc union (in/out c : Conjunto of T, in s : Conjunto of T)
-    
+    var s_aux : Conjunto of T
+		s_aux := copy_list(s)
+		while(not is_empty(s_aux)) do 
+			
 end proc
 
 proc intersec (in/out c : Conjunto of T, in s : Conjunto of T)
