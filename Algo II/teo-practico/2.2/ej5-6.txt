@@ -43,10 +43,10 @@ end proc
 fun pert (c : Conjunto of T, e : T) ret res : bool
     var p : Conjunto of T 
     p := copy_list(c)
-    while(e != head(p)) do
+    while(e != head(p) ^ ¬(is_empty(p))) do
         tail(p)
     od
-    res := ¬(is_empty(p))
+    res :=  ¬(is_empty(p))
 end fun
 
 fun es_vacio (c : Conjunto of T) ret res : bool 
