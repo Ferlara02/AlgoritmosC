@@ -109,13 +109,27 @@ fun tanteador_B (t: Tablero) ret res : bool
 end fun
 
 fun gana_A (t: Tablero) ret res: bool
-    res := (t.tantos_B < t.tantos_A)
+    var j, i : nat
+    var t_aux : Tablero
+		i := 1
+		j := 1 
+		t_aux:=t.tantosA
+		while (not is_init(t_aux)) do
+			decr(t_aux)
+			j := j+1
+		od
+		t_aux:= t.tantosB
+		while(not is_init(t_aux)) do
+			decr(t_aux)
+			j:=j+1
+		od
+		res:= i>j
 end fun
 
 fun gana_B (t: Tablero) ret res: bool
     res := (t.tantos_A < t.tantos_B)
 end fun
-
+	
 fun empate (t: Tablero) ret res : bool
     res := (t.tantos_A = t.tantos_B)
 end fun
