@@ -140,8 +140,8 @@ end proc
 fun index(l : List of T, n : nat) ret e : T
     var p : pointer to (Node of T)
     p := l
-    if(n>1) then
-        for i=1 to n-1 do
+    if(n>=1) then
+        for i=0 to n-1 do
             p := p -> next
         od
     fi
