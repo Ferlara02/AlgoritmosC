@@ -57,7 +57,12 @@ end fun
 proc union (in/out c : Conjunto of T, in s : Conjunto of T)
     var s_aux : Conjunto of T
 		s_aux := copy_list(s)
-		while(not is_empty(s_aux)) do 
+		while(not is_empty(s_aux)) do
+			if(not pert(c, head(s_aux))) then
+				addr(head(s_aux), c)
+			fi
+			tail(s_aux)
+		od
 			
 end proc
 
