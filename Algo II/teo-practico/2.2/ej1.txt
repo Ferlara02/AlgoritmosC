@@ -146,7 +146,6 @@ fun index(l : List of T, n : nat) ret e : T
         od
     fi
     e := p->elem
-    free(p) ??? preguntar
 end fun
 
 proc take(in/out l : List of T, in n : nat)
