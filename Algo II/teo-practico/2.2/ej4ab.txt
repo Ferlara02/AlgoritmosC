@@ -65,6 +65,9 @@ operations
     {- Decrementa el contador c. -}
     {- PRE: not is_init(c) -}
 
+    fun copy(c : Counter) ret c2 c: Counter
+
+
 /* -------------------------------------------- */
 
 implement Tablero where
@@ -109,29 +112,42 @@ fun tanteador_B (t: Tablero) ret res : bool
 end fun
 
 fun gana_A (t: Tablero) ret res: bool
-    var j, i : nat
-    var t_aux : Counter
-		i := 1
-		j := 1 
-		t_aux:=t.tantosA
-		while (not is_init(t_aux)) do
-			decr(t_aux)
-			j := j+1
-		od
-		t_aux:= t.tantosB
-		while(not is_init(t_aux)) do
-			decr(t_aux)
-			j:=j+1
-		od
-		res:= i>j
+    var t_a_aux, t_b_aux : Counter
+	t_a_aux:= copy(t.tantosA)
+    t_b_aux := copy(t.tantosB)
+	while (not is_init(t_a_aux) ^ not is_init(t_b_aux)) do
+		decr(t_a_aux)
+        decr(t_b_aux)
+	od
+	res:= not is_init(t_a_aux)
+    destroy(t_a_aux)
+    destroy(t_b_aux)
 end fun
 
 fun gana_B (t: Tablero) ret res: bool
-    res := (t.tantos_A < t.tantos_B)
+    var t_a_aux, t_b_aux : Counter
+	t_a_aux:= copy(t.tantosA)
+    t_b_aux := copy(t.tantosB)
+	while (not is_init(t_a_aux) ^ not is_init(t_b_aux)) do
+		decr(t_a_aux)
+        decr(t_b_aux)
+	od
+	res:= not is_init(t_b_aux)
+    destroy(t_a_aux)
+    destroy(t_b_aux)
 end fun
 	
 fun empate (t: Tablero) ret res : bool
-    
+    var t_a_aux, t_b_aux : Counter
+	t_a_aux:= copy(t.tantosA)
+    t_b_aux := copy(t.tantosB)
+	while (not is_init(t_a_aux) ^ not is_init(t_b_aux)) do
+		decr(t_a_aux)
+        decr(t_b_aux)
+	od
+	res:= is_init(t_a_aux) ^ is_init(t_b_aux)
+    destroy(t_a_aux)
+    destroy(t_b_aux)
 end fun
 
 proc sumar_n (in/out t: Tablero, e: char, in n: nat)

@@ -1,0 +1,60 @@
+spec Conjunto of T where
+
+constructors  
+    fun vacío() ret c : Conjunto of T
+
+    proc add_elem(in/out c : Conjunto of T, in e : T)
+
+destroy
+    proc destroy_c(in/out c : Conjunto of T)
+
+operations 
+    fun pert (c : Conjunto of T, e : T) ret res : bool
+
+    fun es_vacio (c : Conjunto of T) ret res : bool 
+
+    proc union (in/out c : Conjunto of T, in s : Conjunto of T)
+
+    proc intersec (in/out c : Conjunto of T, in s : Conjunto of T)
+
+    proc dif (in/out c : Conjunto of T, in s : Conjunto of T)
+
+6) b)
+
+implement Conjunto of T where
+
+type Conjunto of T = List of T
+
+fun vacio() ret c : Conjunto of T
+    c := empty()
+end fun
+
+{IDEA: Recorrer la lista hasta encontrar el primer elemento que sea mayor o igual que e, o bien llego al final de la lista, si frene porque encontre un elemento igual, no hago nada. Si frené porque encontré un elemento mayor o llegué al final de la lista, debo insertar el elemento en ese punto}
+{-Voy a usar el proc add_at del ej 3): -}
+
+proc add_t (in/out l : List of T, in n : nat, in e : T)
+    var q : List of T
+    q := copy_list(l)
+    drop(q, n-1)
+    take(l, n-1)
+    addr(l, e)
+    concat(l, q)
+    destroy(q)
+end proc
+
+proc add_elem(in/out c: Conjunto of T, e : T)
+    var n : nat
+    n := 0
+    var l_aux : List of T 
+    l_aux := copy_list(c)
+    //en la guarda del while, con el and asumimos que si lo primero da FALSE lo 2do ya no se evalua. Eso es bueno ya que no estaremos haciendo una llamada a head de una lista vacia
+    while (not is_empty(l_aux) ^ head(l_aux) < e) do 
+        n := n+1
+        tail(l_aux)
+    od
+    if (is_empty(l_aux) v head(l_aux) > e) then
+        add_at(c, n, e)
+    fi
+    destroy_c(l_aux)
+end proc
+

@@ -68,11 +68,12 @@ end proc
 proc intersec (in/out c : Conjunto of T, in s : Conjunto of T)
 
     if (es_vacio(c) v es_vacio(s)) then
-        destroy_c(c) //PREGUNTAR
+        destroy_c(c) 
         c := vacio()
     else 
         var c_aux : Conjunto of T
         c_aux := copy_list(c)
+        destroy_c(c)
         c := vacio()
         while(not es_vacio(c_aux)) do
             if (pert (s, head(c_aux))) then
@@ -87,6 +88,7 @@ end proc
 proc dif (in/out c : Conjunto of T, in s : Conjunto of T)
     var c_aux : Conjunto of T
     c_aux := copy_list(c)
+    destroy_c(c)
     c := vacio()
     while (not es_vacio(c_aux)) do
         if (not pert(s, head(c_aux))) then
@@ -94,6 +96,7 @@ proc dif (in/out c : Conjunto of T, in s : Conjunto of T)
         fi
         tail(c_aux)
     od
+    destroy_c(c_aux)
 end proc
 
 //PREGUNTAR si al final del ciclo debo destruir el c_aux

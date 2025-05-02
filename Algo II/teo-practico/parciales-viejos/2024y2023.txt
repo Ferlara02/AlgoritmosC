@@ -1,0 +1,100 @@
+1) b) 2024
+
+proc upd_straight(in action : Indicacion, in/out r : Recorrido of Indicacion)
+    if (action = Straight) then
+        tail(r)
+    else
+        for i := 1 to 3 do
+            add_ind(action, r)
+        od
+    fi
+end proc
+
+proc upd_left(in action : Indicacion, in/out r : Recorrido of Indicacion)
+    if (action = Left) then
+        tail(r)
+    else
+        for i := 1 to 3 do
+            add_ind(action, r)
+        od
+    fi
+end proc
+
+proc upd_right(in action : Indicacion, in/out r : Recorrido of Indicacion)
+    if (action = Right) then
+        tail(r)
+    else
+        for i := 1 to 3 do
+            add_ind(action, r)
+        od
+    fi
+end proc
+
+fun is_straight(r : Recorrido of Indicacion) ret res : Bool
+    res := head(r) = Straight
+end fun
+fun is_left(r : Recorrido of Indicacion) ret res : Bool
+    res := head(r) = Left
+end fun
+fun is_Right(r : Recorrido of Indicacion) ret res : Bool
+    res := head(r) = Right
+end fun
+fun is_destiny(r : Recorrido of Indicacion) ret res : Bool
+    res := is_empty(r)
+end fun
+
+fun length_r(r : Recorrrido of Indicacion) ret res : Nat 
+    res := length(r) * 100
+end fun
+
+
+2) 2024
+
+type node = tuple 
+                value := elem
+                next := pointer to node
+            end tuple
+
+type list = pointer to node
+
+
+{El penultimo elemento de la lista pasara a tener next null, mientras que el ultimo tendra next=l}
+proc lshift (in/out l : list)
+    if(l != null ^ l->next != null)
+        var ult, penult : pointer to node
+        penult := null
+        ult := l
+        while ult->next != null do
+            penult := ult
+            ult := ult -> next
+        od
+        penult->next := null
+        ult->next := l
+        l:=ult
+    fi
+end proc
+
+
+
+
+1)b) 2023 
+proc p (in/out a : array[1..n] of Int, in c : Int, out k : Nat)
+    var i, j : nat
+    i := 1
+    j := n
+    while i<=j do
+        if a[i] < c -> i++
+        if a[j] > c -> j--
+        if a[i] > c ^ a[j] < c -> swap(a, i, j)
+                                  i := i+1
+                                  j := j-1  
+    od
+    k := j
+end proc
+
+proc swap(in/out a : array[1..n] of Int, in i, j : nat)
+    var aux : Int
+    aux := a[i]
+    a[i] := a[j]
+    a[j] := aux
+end proc
