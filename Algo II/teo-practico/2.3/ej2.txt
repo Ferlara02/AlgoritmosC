@@ -1,0 +1,65 @@
+2)
+
+implement Stack of T where 
+type Node of T = tuple 
+                    elem : T 
+                    next : pointer to (Node of T)
+                end tuple 
+type Stack of T = pointer to (Node of T)
+
+fun empty_stack() ret s : Stack of T
+    s := null
+end fun
+
+proc push(in e : T, in/out s : Stack of T)
+    var p : pointer to (Node of T)
+    alloc(p)
+    p->elem := e 
+    p->next := s
+    s := p
+end proc
+
+proc destroy_stack(in/out s : Stack of T)
+    var p: pointer to (Node of T)
+    while (s ≠ null) do
+        p:= s
+        s:= s->next
+        free(p)
+    od
+end proc
+
+fun is_empty_stack(s : Stack of T) ret b : Bool 
+    b := (s = null)
+end fun
+
+fun top(s : Stack of T) ret e : T 
+    e := s->elem
+end fun
+
+proc pop(in/out s : Stack of T)
+    var p : pointer to (Node of T)
+    p := l 
+    l := l->next 
+    free(p)
+end proc
+
+fun copy_stack(s : Stack of T) ret s_copy : Stack of T
+    var p: pointer to (Node of T)
+    var q: pointer to (Node of T)
+    if (s = null) then 
+        s_copy := empty_list()
+    else
+        alloc(s_copy)
+        s_copy->elem := s->elem
+        p := s->next
+        q := s_copy
+        while (p != null) do
+            alloc(q->next)
+            q := q->next
+            q->elem := p->elem
+            p := p->next
+        od
+        q -> next := null
+    fi
+end fun
+

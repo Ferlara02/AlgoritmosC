@@ -1,0 +1,34 @@
+1)
+
+implement Stack of T where
+type Stack of T := List of T
+
+fun empty_stack() ret s : Stack of T
+    s := empty()
+end fun 
+
+proc push(in e : T, in/out s : Stack of T)
+    addl(e, s)
+end proc
+
+proc destroy_stack(in/out s : Stack of T)
+    destroy(s)
+end proc
+
+fun is_empty_stack(s : Stack of T) ret b : bool
+    b := is_empty(s)
+end fun
+
+{PRE: not is_empty_stack(s)}
+fun top(s : Stack of T) ret e : T 
+    e := head(s)
+end fun
+
+{PRE: not is_empty_stack(s)}
+proc pop (in/out s : Stack of T)
+    tail(s)
+end proc 
+
+fun copy_stack(s : Stack of T) ret s_copy : Stack of T
+    s_copy := copy_list(s)
+end fun
