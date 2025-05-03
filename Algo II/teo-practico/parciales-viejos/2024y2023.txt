@@ -98,3 +98,136 @@ proc swap(in/out a : array[1..n] of Int, in i, j : nat)
     a[i] := a[j]
     a[j] := aux
 end proc
+
+
+4) 2023
+
+a)
+spec Multiset of T where 
+
+constructors 
+    fun empty_m() ret m : Multiset of T 
+    proc add_elem (in/out m : Multiset of T, in e : T)
+
+destroy
+    proc destroy_m(in/out m : Multiset of T)
+
+operations
+    fun is_m_empty(m : Multiset of T) ret b : Bool  
+
+    fun belongs_m(m : Multiset of T, e : T) ret b : Bool
+
+    fun number_of_occur(m : Multiset of T, e : T) ret n : nat
+
+    proc delete_e(in/out m : Multiset of T, in e :T) 
+
+    fun copy_m (m : Multiset of T) ret m2 : Multiset of T 
+
+b)
+implement Multiset of T where 
+
+type Set of T = tuple
+                    elem : T 
+                    occur : nat 
+                end tuple 
+
+type Multiset of T = List of (Set of T)
+
+fun empty_m() ret m : Multiset of T 
+    m := empty()
+end fun
+
+proc add_elem(in/out m : Multiset of T, in e : T)
+    var k : Set of T
+    k.elem := e
+    if(is_empty(m)) then 
+        k.occur := 1
+        addl(k, m)
+    else 
+        var m2 : Multiset of T 
+        m2 := copy_list(m)
+        var n : nat 
+        n := 0
+        while(head(m2).elem != e ^ not is_empty(m2)) do
+            tail(m2)
+            n := n+1 
+        od 
+        if(is_empty(m2)) then 
+            k.occur := 1
+            addl(k, m)
+            destroy(m2)
+        else 
+            head(m2).occur := head(m2).occur + 1
+            take(m, n-1)
+            concat(m, m2)
+        fi
+    fi
+end proc
+
+proc destroy_m(in/out m : Multiset of T)
+    destroy(m)
+end proc 
+
+fun is_m_empty(m : Multiset of T) ret b : Bool  
+    is_empty(m)
+end fun 
+
+fun belongs_m(m : Multiset of T, e : T) ret b : Bool
+    b := false 
+    var i : nat 
+    i := 0
+    length_m := length(m) 
+    while (not b ^ i < length_m) do     
+        b := b v (index(m, i).elem = e)
+        i := i+1 
+    od 
+end fun 
+
+fun number_of_occur(m : Multiset of T, e : T) ret n : nat
+    var i : nat
+    i := 0
+    if(not belongs_m(m, e)) then 
+        n := 0
+    else 
+        while (index(m, i).elem != e) do
+            i := i+1 
+        od 
+        n := index(m, i).occur  
+    fi 
+end fun 
+
+{PRE: not is_m_empty(m)}
+proc delete_e(in/out m : Multiset of T, in e :T) 
+    var i : nat 
+    i := 0
+    var k : nat 
+    k := number_of_occur(m, e)
+    if (k = 0) then 
+        skip 
+    else if (k = 1) 
+        while(head(m).elem != e) do 
+            addr(head(m))
+            tail(m)
+        od 
+        tail(m)
+    else   
+        while(index(m, i).elem != e) do     
+            i:= i+1 
+        od
+        index(m, i).occur := index(m, i).occur - 1
+    fi
+end proc 
+
+fun copy_m (m : Multiset of T) ret m2 : Multiset of T 
+    m2 := copy_list(m)
+end fun 
+
+4) c) 
+
+fun pares_multiset(a : array[1..n] of nat) ret m : Multiset of nat 
+    for i := 1 to n do 
+        if(a[i] mod 2 = 0) then 
+            add_elem(m, a[i])
+        fi 
+    od 
+end fun 
