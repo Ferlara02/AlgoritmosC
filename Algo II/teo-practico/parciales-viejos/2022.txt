@@ -38,3 +38,24 @@ fun max_pos_from(a : array[1..n] of T, i, j : nat) ret maxpos : nat
 end fun 
 
 
+4) Implementar funcion que reciba dos listas de enteros
+y devuelva otra lista que contenga en las posiciones pares
+todos los elementos de la primera lista en el mismo orden,
+y en las posiciones impares todos los elementos de la segunda lista y en el mismo orden.
+
+Asumimos que la primera posicion es par, pues la especificacion del index() sugiere que el 1er elemento esta en la posicion 0 (par).
+
+{- PRE: length(l) = length(m) -}
+fun concat_paridad(l : List of T, m : List of T) ret q : List of T
+    q := empty()
+    var p, c : List of T 
+    p := copy_list(l)
+    c := copy_list(m)
+    while(not is_empty(p) ^ not is_empty(c)) do 
+        addr(q, head(p))
+        tail(p)
+        addr(q, head(c)) //si la 1ra pos fuese impar, esto deberia invertirse
+        tail(c)
+    od 
+end fun 
+
