@@ -1,0 +1,40 @@
+1) Cocktail sort: una variacion del selection sort 
+
+proc cocktail_sort(in/out a :array[1..n] of T)
+    var i, j, minpos, maxpos : nat 
+    i := 1
+    j := n
+    do i < j -> minpos := min_pos_from(a, i, j)
+                swap(a, i, minpos)
+                maxpos := max_pos_from(a, i, j)
+                swap(a, j, maxpos)
+                i := i+1
+                j := j-1
+    od
+end proc 
+
+fun min_pos_from(a : array[1..n] of T, i, j : nat) ret minpos : nat
+    var k : nat 
+    k := i+1 
+    minpos := i
+    while k <= j do 
+        if a[k] < a[minpos] then 
+            minpos := k
+        fi 
+        k := k+1
+    od 
+end fun 
+
+fun max_pos_from(a : array[1..n] of T, i, j : nat) ret maxpos : nat
+    var k : nat 
+    k := i+1 
+    maxpos := i
+    while k <= j do 
+        if a[k] > a[minpos] then 
+            maxpos := k
+        fi 
+        k := k+1
+    od 
+end fun 
+
+
