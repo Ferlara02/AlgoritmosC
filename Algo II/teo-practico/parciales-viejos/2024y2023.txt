@@ -1,5 +1,31 @@
 1) b) 2024
 
+spec Recorrido of T where 
+constructors 
+    -
+    -
+destroy 
+operations 
+
+----------------------
+type Indicacion = enumerate 
+                    Straight 
+                    Left 
+                    Right
+                  end enumerate 
+
+implement Recorrido of Indicacion where 
+type Recorrido of Indicacion = List of Indicacion
+
+fun init() ret r : Recorrido of Indicacion 
+    r := empty()
+end fun 
+
+proc add_ind(in/out r : Recorrido of Indicacion, in a : Indicacion) 
+    addl(a, r)
+end proc 
+
+
 proc upd_straight(in action : Indicacion, in/out r : Recorrido of Indicacion)
     if (action = Straight) then
         tail(r)
@@ -13,9 +39,15 @@ end proc
 proc upd_left(in action : Indicacion, in/out r : Recorrido of Indicacion)
     if (action = Left) then
         tail(r)
-    else
+    else if action = Straight
+        tail(r)
+        add_ind(Straight, r)
         for i := 1 to 3 do
-            add_ind(action, r)
+            add_ind(Right, r)
+        od
+    else 
+        for i := 1 to 3 do
+            add_ind(Right, r)
         od
     fi
 end proc
@@ -23,9 +55,11 @@ end proc
 proc upd_right(in action : Indicacion, in/out r : Recorrido of Indicacion)
     if (action = Right) then
         tail(r)
-    else
+    else if action = Straight
+        tail(r)
+        add_ind(Straight, r)
         for i := 1 to 3 do
-            add_ind(action, r)
+            add_ind(Left, r)
         od
     fi
 end proc
@@ -33,12 +67,15 @@ end proc
 fun is_straight(r : Recorrido of Indicacion) ret res : Bool
     res := head(r) = Straight
 end fun
+
 fun is_left(r : Recorrido of Indicacion) ret res : Bool
     res := head(r) = Left
 end fun
-fun is_Right(r : Recorrido of Indicacion) ret res : Bool
+
+fun is_right(r : Recorrido of Indicacion) ret res : Bool
     res := head(r) = Right
 end fun
+
 fun is_destiny(r : Recorrido of Indicacion) ret res : Bool
     res := is_empty(r)
 end fun
@@ -59,6 +96,7 @@ type list = pointer to node
 
 
 {El penultimo elemento de la lista pasara a tener next null, mientras que el ultimo tendra next=l}
+
 proc lshift (in/out l : list)
     if(l != null ^ l->next != null)
         var ult, penult : pointer to node
@@ -73,8 +111,6 @@ proc lshift (in/out l : list)
         l:=ult
     fi
 end proc
-
-
 
 
 1)b) 2023 
@@ -148,7 +184,7 @@ proc add_elem(in/out m : Multiset of T, in e : T)
         m2 := copy_list(m)
         var n : nat 
         n := 0
-        while(head(m2).elem != e ^ not is_empty(m2)) do
+        while(not is_empty(m2) ^ head(m2).elem != e) do
             tail(m2)
             n := n+1 
         od 
@@ -157,10 +193,43 @@ proc add_elem(in/out m : Multiset of T, in e : T)
             addl(k, m)
             destroy(m2)
         else 
-            head(m2).occur := head(m2).occur + 1
-            take(m, n-1)
-            concat(m, m2)
+            if (n=0) then 
+                head(m).occur := head(m).occur + 1  
+                destroy(m2)
+            else 
+                head(m2).occur := head(m2).occur + 1
+                take(m, n)
+                concat(m, m2)
+            fi
         fi
+    fi
+end proc
+
+{-VARIANTE CON INDEX-}
+proc add_elem(in/out m : Multiset of T, in e : T)
+    var k : Set of T 
+    k.elem := e 
+    if(is_empty(m)) then
+        k.occur := 1 
+        addl(k, m)
+    else 
+        var i : nat 
+        i := 0 
+        while(i < length_m(m) ^ index(m, i).elem != e) do 
+            i := i+1
+        od 
+        if(i = length_m(m)) then 
+            k.occur := 1
+            addr(k, m)
+        else
+            k.occur := index(m, i).occur + 1  
+            var m2 : Multiset of T 
+            m2 := copy_list(m)
+            take(m, i) //toma los primeros i elementos (no incluye al elem e, pues este está en la posicion i, que es el i+1 elemento)
+            drop(m2, i+1) //dropea los primeros i+1 elementos, es decir, incluyendo a e
+            addr(k, m)
+            concat(m, m2)
+        fi 
     fi
 end proc
 
