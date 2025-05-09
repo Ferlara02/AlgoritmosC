@@ -156,7 +156,7 @@ proc take(in/out l : List of T, in n : nat)
         if (n = 0) then
             while (not is_empty(l)) do
                 p := l
-                l := -> next
+                l := l -> next
                 free(p)
             od
         else if (n > 0) then

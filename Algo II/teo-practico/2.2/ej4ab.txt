@@ -165,6 +165,7 @@ end proc
 proc castigo_n (in/out t: Tablero, e: char, in n: nat)
     if(e = 'A') then
         if(n > t.tantosA) then
+            destroy_t(t.tantosA)
             t.tantosA := init()
         else
             for i := 1 to n do
@@ -173,6 +174,7 @@ proc castigo_n (in/out t: Tablero, e: char, in n: nat)
         fi
     else if ('B') then
         if(n > t.tantosB) then
+            destroy_t(t.tantosB)
             t.tantosB := init()
         else
             for i := 1 to n do

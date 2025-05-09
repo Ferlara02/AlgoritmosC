@@ -33,13 +33,10 @@ int * array_from_file(const char *filepath, size_t *length) {
         fprintf(stderr, "Invalid array.\n");
         exit(EXIT_FAILURE);
     }
-    int *array=NULL;
-    //
-    // COMPLETAR: - Reservar memoria para array
-    //            - Cambiar el valor de *length para que contenga el tamaño del
-    //              arreglo.
-    //
-    *length = size;
+    int *array = malloc(size * sizeof(int));  // ← RESERVAR MEMORIA
+
+    *length = size; // Guardo la cantidad de elementos leídos.
+
     if (size > 0 && array == NULL) {
         fprintf(stderr, "Not enough memory\n");
         exit(EXIT_FAILURE);
@@ -48,6 +45,7 @@ int * array_from_file(const char *filepath, size_t *length) {
         res = fscanf(file," %d ", &(array[i]));
         if (res != 1) {
             fprintf(stderr, "Invalid array.\n");
+            free(array); //se libera el array en caso de que no encuentre un elemento válido
             exit(EXIT_FAILURE);
         }
        ++i;

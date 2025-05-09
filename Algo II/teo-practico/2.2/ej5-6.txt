@@ -76,7 +76,7 @@ proc intersec (in/out c : Conjunto of T, in s : Conjunto of T)
         destroy_c(c)
         c := vacio()
         while(not es_vacio(c_aux)) do
-            if (pert (s, head(c_aux))) then
+            if (pert(s, head(c_aux))) then
                 add_elem(c, head(c_aux))
             fi
             tail(c_aux)
