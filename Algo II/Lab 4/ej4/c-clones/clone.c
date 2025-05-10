@@ -6,15 +6,20 @@
 #define MAX_LENGTH 1820
 
 char *string_clone(const char *str, size_t length) {
-    char clon[MAX_LENGTH];
-    char *output=clon;
+    //length toma valor 1812 (gdb)
+
+    /*string_clone CORREGIDO: */
+    char *output=malloc(length+1); //+1 para el '\0'
     for (size_t i=0; i<length;i++) {
         output[i] = str[i];
     }
-    output[length] = '\0';
+
+    output[length] = '\0'; //esto es equivalente a *(output + length) = '\0', es decir, estoy modificando el valor ALOJADO en output+length
     return output;
 }
-
+/*El problema de string_clone es que al puntero output nunca se le reserva memoria, 
+apunta a una variable local (clon) que sólo vive en la funcion string_clone. 
+Es un puntero que solo vive en memoria estática, lo cual es contradictorio*/
 
 int main(void) {
     char original[]=""
@@ -68,6 +73,8 @@ int main(void) {
     printf("Copia   :\n" ANSI_CYAN
            " %s\n", copy);
 
+    free(copy); //liberacion para evitar memory leaks
+    copy = NULL;       
     return EXIT_SUCCESS;
 }
 
