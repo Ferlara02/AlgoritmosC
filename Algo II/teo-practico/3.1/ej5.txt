@@ -1,0 +1,12 @@
+5) Suponiendo que conoces los días de partida y regreso (pi y ri respectivamente) de cada uno de tus amigos,
+¿cu´al es el criterio para determinar, en un momento dado, a quien conviene prestarle el equipo?
+Tener en cuenta que cuando alguien lo devuelve, reci´en a partir del d´ıa siguiente puede usarlo otro. Escribir
+un algoritmo voraz que solucione el problema.
+
+
+I- Criterio de selección:
+Debo ir seleccionando al amigo que menos cantidad de gente superpone su fecha de regreso con la fecha de partida de los demás. //-->REVISAR
+
+II- Podriamos representar la informacion recibida como un arreglo de tuplas, cada tupla con los campos amigo : Int, p : Int (fecha de partida), r : int (fecha de regreso) y un campo superposiciones, que inicialmente será nulo (pues lo tenemos que calcular), pero luego me servirá para seleccionar el amigo que MENOR CANTIDAD de superposiciones tenga. Luego la informacion que devolveremos será una lista con los amigos a los que les prestaremos el telefono. //-->REVISAR
+
+III- La idea del algoritmo es, primero, calcular la cantidad de superposiciones que implica cada uno.- Luego, seleccionar el amigo con menor numero de sup. de todos. Teniendo este amigo seleccionado, 
