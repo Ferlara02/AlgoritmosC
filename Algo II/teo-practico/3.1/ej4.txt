@@ -50,3 +50,5 @@ proc swap (in/out a:array[1..n] of ballena, in i, j : int)
     a[i] := a[j]
     a[j] :0 tmp 
 end proc 
+
+
