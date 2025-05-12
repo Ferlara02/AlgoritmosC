@@ -35,7 +35,7 @@ NO SE ELIGE li pero si se restablece la autonomia (pues se cargó combustible).
 ### IV) Algoritmo:
 
 ~~~
-~~~~haskell
+
 proc puntos_de_carga(in l:array[1..N+1] of T,  in d:array[2..N+1] of int, in A : int, out puntos_carga : List of T, out cargas : Int)
     puntos_carga := empty_list()
     addl(puntos_carga, l[1])

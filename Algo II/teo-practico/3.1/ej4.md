@@ -29,7 +29,7 @@ sin contar la ya salvada (y mientras el tiempo sea >0).
 
 ### IV) Algoritmo:
 ~~~
-~~~~haskell
+
 type ballena = tuple 
                     num : Int 
                     s : Int 

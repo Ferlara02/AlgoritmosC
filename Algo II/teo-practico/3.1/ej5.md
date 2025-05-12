@@ -28,7 +28,7 @@ ocupado + 1. El ultimo dia ocupado es la fecha de llegada del ultimo amigo añad
 > formato de fecha: 4 digitos: MMDD
 
 ~~~
-~~~~haskell
+
 type Amigo = tuple
                 num : Int 
                 p : Int 
