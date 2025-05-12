@@ -1,24 +1,42 @@
-3) Se desea realizar un viaje en auto con autonomia A (km) desde l0 hasta ln
+3) Se desea realizar un viaje en auto con autonomia A (km) 
+desde l0 hasta ln
 pasando por l1,....ln-1 (en ese orden).
-Se conoce cada distancia di <= A entre li-1 e li. Y existe una estacion en c/una 
-de las localidades. 
+Se conoce cada distancia di <= A entre li-1 e li. 
+Y existe una estacion en c/una de las localidades. 
 
-Algoritmo que compute el menor numero de veces que es necesario cargar combustible para realizar el viaje, y las localidades donde realizará la carga suponiendo que
-inicialmente el tanque se encuentra vacío.
+Algoritmo que compute el menor numero de veces 
+que es necesario cargar combustible para realizar 
+el viaje, y las localidades donde realizará la carga 
+suponiendo que inicialmente el tanque se encuentra vacío.
 
-I- El primer paso es elegir un criterio de selección para las localidades,
-en definitiva el algoritmo lo que hará es elegir un subconjunto desde el conjunto l0,....,ln bajo un criterio de seleccion.
-El algoritmo es voraz, entonces una vez elegida cada li, no volverá a mirarla y seguirá con el li+1.
+I- El primer paso es elegir un criterio de selección 
+para las localidades, en definitiva el algoritmo 
+lo que hará es elegir un subconjunto desde el conjunto 
+l0,....,ln bajo un criterio de seleccion.
+El algoritmo es voraz, entonces una vez elegida cada li, 
+no volverá a mirarla y seguirá con el li+1.
 
 Dado di y dada A, el criterio de seleccion puede ser:
 -1) estando parado en lk-1, y dado dk la distancia entre lk-1 y lk, 
-si C > dk, entonces NO CARGO en lk-1 (siendo C el combustible que me queda, esto es la autonomia MENOS la distancia recorrida hasta ese punto SIN CARGAR COMBUSTIBLE)
+si C > dk, entonces NO CARGO en lk-1 (siendo C el combustible 
+que me queda, esto es la autonomia MENOS la distancia recorrida 
+hasta ese punto SIN CARGAR COMBUSTIBLE)
 
-II- Estructura de datos: Teniendo a disposicion el TAD Counter, TAD Lista, TAD Pila, TAD Cola, etc. Podríamos representar el conjunto de localidades a cargar como una lista of T, siendo li : T, y el conjunto de localidades recibidas como un arreglo al igual que el conjunto de distancias di.
+II- Estructura de datos: Teniendo a disposicion el TAD Counter, 
+TAD Lista, TAD Pila, TAD Cola, etc. Podríamos representar el 
+conjunto de localidades a cargar como una lista of T, siendo li : T, 
+y el conjunto de localidades recibidas como un arreglo al igual que 
+el conjunto de distancias di.
 
 III- El algoritmo tendrá el siguiente funcionamiento:
-Primero se elige l0 (se lo añade a la lista), pues el tanque es vacío. A partir de allí vamos calculando lo que me queda de AUTONOMÍA a partir de la distancia recorrida (sin cargar combustible) y la autonomía. 
-Se elige li (localidad en donde estoy parado) al conjunto si y solo si se satisface que la distancia entre li y li+1 (di+1) es MENOR que la autonomia restante. En caso que no se satisfaga esto, NO SE ELIGE li pero si se restablece la autonomia (pues se cargó combustible).
+Primero se elige l0 (se lo añade a la lista), pues el tanque 
+es vacío. A partir de allí vamos calculando lo que me queda 
+de AUTONOMÍA a partir de la distancia recorrida 
+(sin cargar combustible) y la autonomía. 
+Se elige li (localidad en donde estoy parado) al conjunto 
+si y solo si se satisface que la distancia entre li y li+1 (di+1) 
+es MENOR que la autonomia restante. En caso que no se satisfaga esto, 
+NO SE ELIGE li pero si se restablece la autonomia (pues se cargó combustible).
 
 IV- Algoritmo en codigo:
 

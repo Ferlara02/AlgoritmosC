@@ -1,15 +1,24 @@
-5) Suponiendo que conoces los días de partida y regreso (pi y ri respectivamente) de cada uno de tus amigos,
-¿cu´al es el criterio para determinar, en un momento dado, a quien conviene prestarle el equipo?
-Tener en cuenta que cuando alguien lo devuelve, reci´en a partir del d´ıa siguiente puede usarlo otro. Escribir
+5) Suponiendo que conoces los días de partida y regreso
+(pi y ri respectivamente) de cada uno de tus amigos,
+¿cu´al es el criterio para determinar, en un momento dado, 
+a quien conviene prestarle el equipo?
+Tener en cuenta que cuando alguien lo devuelve, 
+recien a partir del dıa siguiente puede usarlo otro. Escribir
 un algoritmo voraz que solucione el problema.
 
 
 I- Criterio de selección:
 Debo ir seleccionando al amigo que termina su viaje antes. 
 
-II- Podriamos representar la informacion recibida como un arreglo de tuplas, donde cada tupla tiene los campos numero : Int, p : Int (fecha de partida), r : int (fecha de regreso). Luego la informacion que devolveremos será una lista del mismo tipo amigo. 
+II- Podriamos representar la informacion recibida como un arreglo de tuplas, 
+donde cada tupla tiene los campos 
+numero : Int, p : Int (fecha de partida), r : int (fecha de regreso). 
+Luego la informacion que devolveremos será una lista del mismo tipo amigo. 
 
-III- Ordena el arreglo de menor a mayor segun la fecha de regreso de cada amigo recorriendo el arreglo. Una vez teniendo el arreglo ordenado, lo recorre una vez más, añadiendo a la lista sólo los amigos que tienen fecha de partida POSTERIOR al ultimo dia ocupado + 1. El ultimo dia ocupado es la fecha de llegada del ultimo amigo añadido a la lista.
+III- Ordena el arreglo de menor a mayor segun la fecha de regreso de cada amigo
+recorriendo el arreglo. Una vez teniendo el arreglo ordenado, lo recorre una vez más, 
+añadiendo a la lista sólo los amigos que tienen fecha de partida POSTERIOR al ultimo dia 
+ocupado + 1. El ultimo dia ocupado es la fecha de llegada del ultimo amigo añadido a la lista.
 
 IV- Algoritmo:
 
