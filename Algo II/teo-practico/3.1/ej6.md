@@ -1,5 +1,6 @@
-6) 
-En el horno se encuentran n piezas de panaderıa 
+
+### 6) 
+> En el horno se encuentran n piezas de panaderıa 
 (facturas, medialunas, etc). Cada pieza i que se encuentra
 en el horno tiene un tiempo mınimo necesario de coccion ti 
 y un tiempo maximo admisible de coccion Ti
@@ -11,7 +12,9 @@ y que ti ≤ Ti para todo i ∈
 para extraer todas las piezas del horno en perfecto estado (ni crudas ni quemadas), 
 abriendo el horno el menor numero de veces posible?
 
---> El criterio de selección es: en cada tiempo tk, 
-sacar la mayor cantidad de piezas posibles mientras 
-estas cumplan que tk ∈ {ti,..,Ti}
+# El criterio de selección es: 
+en cada tiempo tk, sacar la mayor cantidad de piezas posibles mientras estas cumplan que tk ∈ {ti,..,Ti} 
 
+~~~
+
+~~~

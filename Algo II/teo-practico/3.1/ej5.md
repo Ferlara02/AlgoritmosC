@@ -1,4 +1,4 @@
-5) Suponiendo que conoces los días de partida y regreso
+> 5) Suponiendo que conoces los días de partida y regreso
 (pi y ri respectivamente) de cada uno de tus amigos,
 ¿cu´al es el criterio para determinar, en un momento dado, 
 a quien conviene prestarle el equipo?
@@ -7,22 +7,27 @@ recien a partir del dıa siguiente puede usarlo otro. Escribir
 un algoritmo voraz que solucione el problema.
 
 
-I- Criterio de selección:
-Debo ir seleccionando al amigo que termina su viaje antes. 
+### I) Criterio de selección:
+- Debo ir seleccionando al amigo que termina su viaje antes. 
 
-II- Podriamos representar la informacion recibida como un arreglo de tuplas, 
+### II) Estructura de datos: 
+- Podriamos representar la informacion recibida como un arreglo de tuplas, 
 donde cada tupla tiene los campos 
 numero : Int, p : Int (fecha de partida), r : int (fecha de regreso). 
 Luego la informacion que devolveremos será una lista del mismo tipo amigo. 
 
-III- Ordena el arreglo de menor a mayor segun la fecha de regreso de cada amigo
+### III) Funcionamiento: 
+
+- Ordena el arreglo de menor a mayor segun la fecha de regreso de cada amigo
 recorriendo el arreglo. Una vez teniendo el arreglo ordenado, lo recorre una vez más, 
 añadiendo a la lista sólo los amigos que tienen fecha de partida POSTERIOR al ultimo dia 
 ocupado + 1. El ultimo dia ocupado es la fecha de llegada del ultimo amigo añadido a la lista.
 
-IV- Algoritmo:
+### IV) Algoritmo:
 
-//formato de fecha: 4 digitos: MMDD
+> formato de fecha: 4 digitos: MMDD
+
+~~~
 type Amigo = tuple
                 num : Int 
                 p : Int 
@@ -71,3 +76,5 @@ fun select_amigos(a : array[1..n] of Amigo) ret l : List of Amigo
 end fun 
 
 //faltaria completar el quick_sort (aunque podria ser cualquier algo de ordenacion)
+
+~~~

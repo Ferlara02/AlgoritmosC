@@ -1,12 +1,14 @@
-4) 
+> 4) 
 
-I- El criterio de selección se hará sobre S1,...,Sn, 
+### I) Criterio de selección: 
+- se hará sobre S1,...,Sn, 
 siendo cada Sk el tiempo de supervivencia de la respectiva 
 ballena k.
-La primer ballena a salvar siempre será la que menor 
+* > La primer ballena a salvar siempre será la que menor 
 tiempo de supervivencia tiene en tal momento.
 
-II- Dado que el orden es importante, podemos representar 
+### II) Estructura de datos: 
+- Dado que el orden es importante, podemos representar 
 la secuencia de ballenas a salvar con un arreglo 
 (siendo el primer elemento la primer ballena a salvar), 
 pero como el tiempo de supervivencia va ligado a cada ballena, 
@@ -15,7 +17,8 @@ tanto con el numero de ballena como el tiempo de sup. de la misma.
 Luego, lo que devuelve el algoritmo es una LISTA pero solo con el 
 numero de las ballenas.
 
-III- El algoritmo ordenará de menor a mayor las ballenas bajo su 
+### III) Funcionamiento: 
+- El algoritmo ordenará de menor a mayor las ballenas bajo su 
 tiempo de supervivencia.
 Lo que hará será ir seleccionando la ballena con el 
 menor tiempo de supervivencia de todo un segmento del 
@@ -24,6 +27,8 @@ a cada una de las otras ballenas. Se repite el proceso,
 seleccionando ahora la ballena con menor tiempo de supervivencia 
 sin contar la ya salvada (y mientras el tiempo sea >0).
 
+### IV) Algoritmo:
+~~~
 type ballena = tuple 
                     num : Int 
                     s : Int 
@@ -68,3 +73,4 @@ proc swap (in/out a:array[1..n] of ballena, in i, j : int)
 end proc 
 
 
+~~~
