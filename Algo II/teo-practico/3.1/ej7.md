@@ -12,7 +12,7 @@
 - Recibo un arreglo de tuplas con los datos de cada sobreviviente, una cantidad C de oxigeno en nat, y un tiempo t que es el que tardo en rescatar a cada sobreviviente; y devuelvo una lista con el orden a salvar.
 
 ### III) Funcionamiento: 
-- Primero ordeno el arreglo de mayor a menor de acuerdo al oxigeno que consume cada uno. Luego, voy recorriendo el arreglo, mientras el oxigeno NO sea 0 y desde el primer elemento. Al elemento en el que estoy parado lo agrego a la lista por derecha, y luego recorro nuevamente el arreglo desde la posicion SIGUIENTE hasta n para calcular el oxigeno consumido, por todos los sobrevivientes restantes, durante el tiempo de rescate t. Dicho resultado será lo que le resto al oxígeno restante. 
+- Primero ordeno el arreglo de mayor a menor de acuerdo al oxigeno que consume cada uno. Luego, voy recorriendo el arreglo mientras el oxigeno NO sea 0 y desde el primer elemento. Al elemento en el que estoy parado (i) lo agrego a la lista por derecha, luego recorro nuevamente el arreglo desde la posicion SIGUIENTE (i+1) hasta n para calcular el oxigeno consumido -por todos los sobrevivientes restantes- durante el tiempo de rescate t. Dicho resultado será lo que le resto al oxígeno que queda. 
 
 ### IV) Algoritmo:
 
