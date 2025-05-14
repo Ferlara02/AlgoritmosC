@@ -56,7 +56,7 @@ end fun
 
 ### b):
 
--La modificacion que debo hacer es sólo sobre la funcion principal, dejando las auxiliares como en a): 
+- La modificacion que debo hacer es sólo sobre la funcion principal, dejando las auxiliares como en a): 
 
 ~~~ 
 fun (a:array[1..n] of survivor, c : nat, t : nat, m : nat) ret l : List of survivor
