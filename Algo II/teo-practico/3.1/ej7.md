@@ -33,7 +33,7 @@ fun (a:array[1..n] of survivor, c : nat, t : nat) ret l : List of survivor
     var i : nat
     i := 1
     l := empty_list()
-    while(i<n && resto > 0) do 
+    while(i<=n && resto > 0) do 
         addr(l, a[i])
         consumed := get_consumed(a, i+1, t)
         resto := resto - consumed
@@ -44,9 +44,11 @@ end fun
 fun get_consumed(a:array[1..n] of survivor, i : nat, t) ret consumed : nat
     var x : nat
     x := 0
-    for j := i to n do
-        x := x + a[j].c * t
-    od
+    if(i<n+1) then 
+        for j := i to n do
+            x := x + a[j].c * t
+        od
+    fi
     res := x  
 end fun
 
@@ -67,7 +69,7 @@ fun (a:array[1..n] of survivor, c : nat, t : nat, m : nat) ret l : List of survi
     var i : nat
     i := 1
     l := empty_list()
-    while(resto > 0 && i<n>)
+    while(resto > 0 && i<=n)
         while(i<=m) do 
             addr(l, a[i])
             i := i+1
