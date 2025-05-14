@@ -65,13 +65,15 @@ end fun
 
 //VERSION CON UN ARREGLO (definitiva)
 fun select_amigos(a : array[1..n] of Amigo) ret l : List of Amigo
-    quick_sort_mod(a) //variante que ordena segun fecha de regreso
+    var a_aux : array[1..n] of Amigo
+    a_aux := copy_array(a)
+    quick_sort_mod(a_aux) //variante que ordena segun fecha de regreso
     l := empty_list()
     var ult_dia_ocupado := -1 
     for i := 1 to n do 
-        if(a[i].p > ult_dia_ocupado + 1) then 
-            addl(l, a)
-            ultimo_dia_ocupado := a[i].r
+        if(a_aux[i].p > ult_dia_ocupado + 1) then 
+            addl(l, a_aux[i])
+            ultimo_dia_ocupado := a_aux[i].r
         fi 
     od 
 end fun 
