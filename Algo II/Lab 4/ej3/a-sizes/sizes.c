@@ -35,7 +35,7 @@ int main(void) {
      
     printf("La dirección de memoria apuntada por messi-height es: %p\n", (void *) &messi.height);
     printf("La dirección de memoria apuntada por messi-age es: %p\n", (void *) &messi.age);
-    printf("La dirección de memoria apuntada por messi-name es: %p\n", (void *) &messi.name);
+    printf("La dirección de memoria apuntada por messi-name es: %p\n", (void *) &messi->name);
     printf("La dirección de memoria apuntada por messi es: %p\n", (void *) &messi);
     printf("La dirección de memoria apuntada por messi UINT es: %lu\n", (uintptr_t) &messi);
 
