@@ -33,7 +33,7 @@ int * array_from_file(const char *filepath, size_t *length) {
         fprintf(stderr, "Invalid array.\n");
         exit(EXIT_FAILURE);
     }
-    int *array = malloc(size * sizeof(int));  // ← RESERVAR MEMORIA
+    int *array = malloc(sizeof(int));  // ← RESERVAR MEMORIA: Buscar si lo correcto es (sizeof(int) * size) o sizeof(int)
 
     *length = size; // Guardo la cantidad de elementos leídos.
 
