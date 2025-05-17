@@ -38,7 +38,7 @@ proc cronograma_bares(in c : Set of Bar, out l : List of Bar, out precio : Float
         else 
             precio_aux := bar.p
         fi
-        precio := precio + precio_aux
+        precio := precio + precio_aux*2
         hora := hora + 1
     od
 
