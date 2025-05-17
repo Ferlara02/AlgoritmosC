@@ -34,7 +34,7 @@ fun cronograma_bares(c : Set of Bar) ret l : List of Bar
     od
 end fun
 
-fun get_min_bar(c : Set of Bar, hora : Nar) ret min_bar : Bar
+fun get_min_bar(c : Set of Bar, hora : Nat) ret min_bar : Bar
     var c2 : Set of Bar
     c2 := copy_set(c)
     var bar : Bar
