@@ -4,9 +4,8 @@
 
 static
 void show_pair(pair_t p) {
-    printf("(%d, %d)\n", p->fst, p->snd);
+    printf("(%d, %d)\n", pair_first(p), pair_second(p));
 }
-
 
 
 int main(void) {
