@@ -51,6 +51,8 @@ list tail(list l){
     p = l;
     l = l->next;
     free(p);
+
+    return l;
 }
 
 list addr(list l, list_elem e){
@@ -85,7 +87,7 @@ list concat(list l1, list l2){
     list p;
     if(!is_empty(l1)) {
         p = l1;
-        while (p->next ! NULL)
+        while (p->next != NULL)
         {
             p = p->next;
         }
@@ -118,7 +120,7 @@ list take(list l, int n){
     /*hago todo 'manual-desde 0' para evitar usar otros construct./operaciones
     del mismo TAD*/
     if(!is_empty(l)) {
-        if(n=0) {
+        if(n==0) {
             while(l != NULL) {
                 p = l;
                 l = l->next;
@@ -158,8 +160,8 @@ list drop(list l, int n){
 
 list copy_list(list l){
     list p, q, l2;
-    if(l = NULL) {
-        l2 = empty_list();
+    if(l == NULL) {
+        l2 = empty();
     } else {
         l2 = malloc(sizeof(struct node_of_T));
         l2->elem = l->elem;
