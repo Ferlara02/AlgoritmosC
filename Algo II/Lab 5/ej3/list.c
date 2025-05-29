@@ -135,8 +135,9 @@ list take(list l, int n){
                 free(p);
             }
         }
-        return l;
+        
     }
+    return l;
 }
 
 
