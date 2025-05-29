@@ -21,17 +21,14 @@ list empty() {
 }
 
 list addl(elem e, list l) {
-    int size_list;
+
     l->size++;
-    size_list = l->size;
-    for (int i = size_list-1; i > 0; i--)
+    for (int i = l->size-1; i >= 0; i--)
     {
         l->elems[i+1] = l->elems[i];
     }
-
     l->elems[0] = e;
     
-
     return l;
 }
 
@@ -56,9 +53,8 @@ list tail(list l) {
 }
 
 list addr(list l, elem e) {
-    l->size++; 
     l->elems[l->size] = e;
-    
+    l->size++; 
     return l;
 }
 
@@ -68,10 +64,11 @@ int length(list l) {
 }
 
 
-/*{PRE: l->size + l0->size <= MAX_SIZE}*/
+/*{PRE: l->size + l0->size <= MAX_LENGTH}*/
 list concat(list l, list l0) {
+    assert(length(l) + length(l0) <= MAX_LENGTH);
     int new_size = l->size + l0->size;
-    for (int i = l->size+1; i < new_size; i++)
+    for (int i = l->size; i < new_size; i++)
     {
         l->elems[i] = l0->elems[i-l->size];
     }
@@ -94,15 +91,15 @@ list take(list l, int n) {
 }
 
 list drop(list l, int n) {
-    int i, k;
-    k = n+1;
-    i = 0;
-    while (k <= l->size){
-        l->elems[i] = l->elems[k];
-        k = k+1;
-        i = i+1;
+    if(n>l->size) {
+        n = l->size;
     }
-    l->size = l->size - n;
+    for (int i = 0; i < l->size; i++)
+    {
+        l->elems[i] = l->elems[n+i];
+    }
+    l->size -= n;
+    return l;
 }
 
 list copy_list(list l) {
@@ -113,8 +110,6 @@ list copy_list(list l) {
     {
         l2->elems[i] = l->elems[i];
     }
-    
-
     return l2;
 }
 

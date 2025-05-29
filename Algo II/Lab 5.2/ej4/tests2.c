@@ -7,6 +7,7 @@
 #define N_TESTCASES_ADDR 4
 #define N_TESTCASES_TAKE 5
 #define N_TESTCASES_DROP 5
+#define N_TESTCASES_CONCAT 4
 
 // construye una lista a partir de un arreglo
 // (usa los constructores de lista empty y addl)
@@ -214,36 +215,41 @@ void test_drop() {
 
 void test_concat() {
     // representación de un solo caso de test
-    struct addr_testcase {
-        int a[MAX_LENGTH];       // elementos de la lista de entrada
-        int length;              // largo de la lista de entrada
-        int n;                   // cantidad de elementos a tomar
-        int result[MAX_LENGTH];  // elementos esperados de la lista resultado
-        int result_length;       // largo esperado de la lista resultado
+    struct concat_testcase {
+        int a[MAX_LENGTH];        // elementos de la primera lista
+        int a_length;             // largo de la primera lista
+        int b[MAX_LENGTH];        // elementos de la segunda lista
+        int b_length;             // largo de la segunda lista
+        int result[MAX_LENGTH];   // elementos esperados de la lista resultado
+        int result_length;        // largo esperado de la lista resultado
     };
 
     // casos de test (uno por línea)
-    struct addr_testcase tests[1] = {
-      { {8, 1, -2}, 3, 0, {8, 1, -2, 8, 1, -2}, 6 }
+    struct concat_testcase tests[N_TESTCASES_CONCAT] = {
+        { {1, 2, 3}, 3, {4, 5}, 2, {1, 2, 3, 4, 5}, 5 },     // concat([1,2,3], [4,5]) == [1,2,3,4,5]
+        { {}, 0, {4, 5}, 2, {4, 5}, 2 },                    // concat([], [4,5]) == [4,5]
+        { {1, 2, 3}, 3, {}, 0, {1, 2, 3}, 3 },              // concat([1,2,3], []) == [1,2,3]
+        { {}, 0, {}, 0, {}, 0 },                            // concat([], []) == []
     };
 
-    list input;
+    list input_a, input_b;
     list result, expected_result;
 
     printf("TESTING concat\n");
 
-    for (int i=0; i < 1; i++) {
-        printf("Test case %i: ", i+1);
+    for (int i = 0; i < N_TESTCASES_CONCAT; i++) {
+        printf("Test case %i: ", i + 1);
 
-        // creamos la lista de entrada
-        input = array_to_list(tests[i].a, tests[i].length);
+        // creamos las listas de entrada
+        input_a = array_to_list(tests[i].a, tests[i].a_length);
+        input_b = array_to_list(tests[i].b, tests[i].b_length);
 
         // TEST! llamamos la función a testear
-        result = concat(input, input);
+        result = concat(input_a, input_b);
 
         // creamos la lista resultado esperada
         expected_result = array_to_list(tests[i].result, tests[i].result_length);
-        
+
         // comparamos resultado obtenido con resultado esperado
         if (is_equal_to(result, expected_result)) {
             printf("OK\n");
