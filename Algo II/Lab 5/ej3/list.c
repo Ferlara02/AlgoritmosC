@@ -176,5 +176,28 @@ list copy_list(list l){
         q->next = NULL;
     }
 
-    return l2;
+    return list take(list l, unsigned int n){
+  unsigned int i=0;
+  list p=NULL, q=NULL;
+  if(!is_empty(l)){
+    if(n==0){
+      list_destroy(l);
+       l=NULL;
+    }
+    else{
+      p=l;
+      while(p->next != NULL && i<(n-1)){
+        p=p->next;
+        i++;
+      }
+      q=p->next;
+      p->next=NULL;
+      while (q != NULL) {
+        p = q;
+        q = q->next;
+        free(p);
+      }
+    }
+  return l;
+  }
 }
