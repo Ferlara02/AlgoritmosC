@@ -115,32 +115,28 @@ list_elem index(list l, int n){
 }
 
 list take(list l, int n){
-    list p, q;
-    int i = 0;
-    /*hago todo 'manual-desde 0' para evitar usar otros construct./operaciones
-    del mismo TAD*/
-    if(!is_empty(l)) {
-        if(n==0) {
-            while(l != NULL) {
-                p = l;
-                l = l->next;
-                free(p);
-            }
-        } else if (n>0) {
-            p = l;
-            while(!is_empty(l) && i < n) {
+    int i=0;
+    list p=NULL, q=NULL;
+    if(!is_empty(l)){
+        if(n==0){
+            list_destroy(l);
+            l = NULL;
+        } else {
+            p=l;
+            while(p->next != NULL && i<(n-1)){
                 p = p->next;
                 i++;
             }
-            while(!is_empty(p)) {
-                q = p;
-                p = p->next;
-                free(q);
+            q = p->next;
+            p->next = NULL;
+            while (q != NULL) {
+                p = q;
+                q = q->next;
+                free(p);
             }
         }
+        return l;
     }
-
-    return l;
 }
 
 
@@ -176,28 +172,5 @@ list copy_list(list l){
         q->next = NULL;
     }
 
-    return list take(list l, unsigned int n){
-  unsigned int i=0;
-  list p=NULL, q=NULL;
-  if(!is_empty(l)){
-    if(n==0){
-      list_destroy(l);
-       l=NULL;
-    }
-    else{
-      p=l;
-      while(p->next != NULL && i<(n-1)){
-        p=p->next;
-        i++;
-      }
-      q=p->next;
-      p->next=NULL;
-      while (q != NULL) {
-        p = q;
-        q = q->next;
-        free(p);
-      }
-    }
-  return l;
-  }
+    return l;
 }
