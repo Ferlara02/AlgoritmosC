@@ -84,15 +84,18 @@ int length(list l){
 
 list concat(list l1, list l2){
     list p;
+    list q;
+    q = copy_list(l2);
+    
     if(!is_empty(l1)) {
         p = l1;
         while (p->next != NULL)
         {
             p = p->next;
         }
-        p->next = l2;
+        p->next = q;
     } else {
-        l1 = l2;
+        l1 = q;
     }
 
     return l1;
