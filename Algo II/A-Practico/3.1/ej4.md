@@ -38,7 +38,7 @@ type ballena = tuple
 
 proc (in/out a:array[1..n] of ballena, in t:Int, out ballenas_a_salvar : List of Int)
     ballenas_a_salvar := empty_list()
-    var i :Int 
+    var i : Int 
     i := 1
     var min_pos : Int  
     while i<n do 
