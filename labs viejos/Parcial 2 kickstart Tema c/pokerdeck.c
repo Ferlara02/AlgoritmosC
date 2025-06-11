@@ -49,7 +49,7 @@ static bool invrep(pokerdeck deck) {
         valid = deck->size_deck == 0;
     }
 
-    // Contar los nodos
+    // verif si la cantidad de nodos coincide con deck->size
     int count = 0;
     node_t current = deck->first;
 
@@ -57,9 +57,9 @@ static bool invrep(pokerdeck deck) {
         count++;
         current = current->nextcard;
     }
-
-    // Comparar con size_deck
     valid = count == deck->size_deck;
+
+
     return valid;
 }
 
@@ -75,8 +75,6 @@ static node_t create_node(cardnum_t num, cardsuit_t suit) {
 
 // Destroy a single node
 static node_t destroy_node(node_t node) {
-    free(node->nextcard);
-    node->nextcard = NULL;
     free(node);
     node = NULL;
     assert(node==NULL);
@@ -143,17 +141,27 @@ unsigned int pokerdeck_length(pokerdeck deck) {
 }
 
 pokerdeck pokerdeck_remove(pokerdeck deck, cardnum_t num, cardsuit_t suit) {
+    assert(invrep(deck));
     node_t aux = deck->first;
     node_t aux2;
     if(deck->size_deck > 0){
-        while(aux->nextcard != NULL && (aux->nextcard->suit != suit && aux->nextcard->num != num)) {
+        //verifico la primera carta del mazo
+        if(aux->suit == suit && aux->num == num) {
+            deck->first = aux->nextcard;
+            aux = destroy_node(aux);
+            deck->size_deck--;
+        }
+        //verifico las demás (si es que el mazo es de mas de 1 carta)
+        while((aux != NULL && aux->nextcard != NULL) && (aux->nextcard->suit != suit && aux->nextcard->num != num)) {
             aux = aux->nextcard;
         }
-        if(aux->nextcard != NULL) {
+        if(aux != NULL && aux->nextcard != NULL) {
             aux2 = aux->nextcard;
             aux->nextcard = aux->nextcard->nextcard;
             aux2 = destroy_node(aux2);
+            deck->size_deck--;
         }
+        
     }
 
     return deck;
