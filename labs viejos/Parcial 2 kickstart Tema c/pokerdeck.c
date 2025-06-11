@@ -100,10 +100,14 @@ bool pokerdeck_is_empty(pokerdeck deck) {
 pokerdeck pokerdeck_add(pokerdeck deck, cardnum_t num, cardsuit_t suit) {
     node_t node = create_node(num, suit);
     node_t aux = deck->first;
-    while(aux != NULL) {
-        aux = aux->nextcard;
+    if(deck->size_deck == 0) {
+        deck->first = node;
+    } else {
+        while(aux->nextcard != NULL) {
+            aux = aux->nextcard;
+        }
+        aux->nextcard = node;
     }
-    aux->nextcard = node;
     deck->size_deck++;
     return deck;
 }
@@ -119,11 +123,18 @@ pokerdeck pokerdeck_push(pokerdeck deck,  cardnum_t num, cardsuit_t suit) {
 }
 
 pokerdeck pokerdeck_pop(pokerdeck deck, cardnum_t *popped_num, cardsuit_t *popped_suit) {
+    assert(deck != NULL);
+    assert(deck->first != NULL); // No deberías hacer pop sobre una lista vacía
+
     node_t temp = deck->first;
-    deck->first = deck->first->nextcard;
+
+    if (popped_num != NULL) *popped_num = temp->num;
+    if (popped_suit != NULL) *popped_suit = temp->suit;
+
+    deck->first = temp->nextcard;
     temp = destroy_node(temp);
-    if (popped_num!=NULL) *popped_num = deck->first->num;
-    if (popped_suit!=NULL) *popped_suit = deck->first->suit;
+
+    deck->size_deck--;
     return deck;
 }
 
