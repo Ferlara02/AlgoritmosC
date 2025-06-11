@@ -182,11 +182,8 @@ struct card * pokerdeck_to_array(pokerdeck deck) {
     assert(deck != NULL);
     assert(invrep(deck));  
 
-    // 1. Reservar memoria para el arreglo dinámico
     struct card *array = malloc(deck->size_deck * sizeof(struct card));
-    assert(array != NULL);  // Siempre conviene chequear
 
-    // 2. Recorrer la lista y llenar el arreglo
     node_t current = deck->first;
     int i = 0;
     while (current != NULL && i < deck->size_deck) {
@@ -195,8 +192,6 @@ struct card * pokerdeck_to_array(pokerdeck deck) {
         current = current->nextcard;
         i++;
     }
-
-    // 3. Retornar el arreglo dinámico
     return array;
 }
 
