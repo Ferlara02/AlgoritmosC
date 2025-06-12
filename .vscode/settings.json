@@ -5,6 +5,7 @@
         "stdbool.h": "c",
         "weather_utils.h": "c",
         "weather_table.h": "c",
-        "random": "c"
+        "random": "c",
+        "array": "c"
     }
 }

@@ -163,10 +163,8 @@ pokerdeck pokerdeck_remove(pokerdeck deck, cardnum_t num, cardsuit_t suit) {
         }
         
     }
-
     return deck;
 }
-
 unsigned int pokerdeck_count(pokerdeck deck, cardsuit_t suit) {
     unsigned int res = 0;
     node_t aux = deck->first;
@@ -186,7 +184,7 @@ struct card * pokerdeck_to_array(pokerdeck deck) {
 
     node_t current = deck->first;
     int i = 0;
-    while (current != NULL && i < deck->size_deck) {
+    while (current != NULL) {
         array[i].num = current->num;
         array[i].suit = current->suit;
         current = current->nextcard;
